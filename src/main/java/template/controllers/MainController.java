@@ -3,7 +3,11 @@ package template.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import template.main.GoogleLocation;
+import template.main.GooglePlace;
+import template.main.GooglePlaces;
 import template.main.GooglePlacesService;
 
 import org.springframework.ui.Model;
@@ -25,13 +29,18 @@ public class MainController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(Model model){
+	public String search(@RequestParam(required=true) String locationName, Model model){
 		double latitude;
 		double longitude;
 		
-		// Coordinates of Waco as sample data
-		latitude = 31.5;
-		longitude = -97.1;
+		GooglePlacesService place = new GooglePlacesService(locationName);
+		GooglePlace gp = place.getPlaceDetails();
+		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
+		System.out.println(gl);
+		latitude = gl.getLatitude();
+		longitude = gl.getLongitude();
+		
+
 		
 		model.addAttribute("latitude", latitude);
 		model.addAttribute("longitude", longitude);

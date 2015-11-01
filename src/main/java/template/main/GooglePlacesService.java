@@ -44,14 +44,19 @@ public class GooglePlacesService {
 		return longitude;
 	}
 	
-	public String getPlaceDetails() {
-//		System.out.println(URL2);
-//		System.out.println(KEY);
-//		System.out.println(latitude);
-//		System.out.println(longitude);
-//		
-		String json = restTemplate.getForObject(URL,
-				  String.class, KEY, "Waco");
-		return json;
+	public GooglePlace getPlaceDetails() {
+		System.out.println(URL);
+		System.out.println(KEY);
+		System.out.println(latitude);
+		System.out.println(longitude);
+		System.out.println(location);
+		
+		
+		GooglePlaces gps = restTemplate.getForObject(URL,
+				  GooglePlaces.class, KEY, location);
+		System.out.println(gps);
+		GooglePlace gp = gps.getGooglePlaces().get(0);
+		System.out.println(gp);
+		return gp;
 	}
 }
