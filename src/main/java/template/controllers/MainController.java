@@ -23,8 +23,31 @@ public class MainController {
 	}
 	
 	@RequestMapping("/map")
-	public String map() {
+	public String map(@RequestParam(required=false) String locationName,
+	                  @RequestParam(required=false) String maxDistance, Model model) {
 
+	    model.addAttribute("locationName", locationName);
+	    model.addAttribute("maxDistance", maxDistance);
+	    
+	    System.out.println(maxDistance);
+	    System.out.println(locationName);
+
+		double latitude;
+		double longitude;
+		
+		GooglePlacesService place = new GooglePlacesService(locationName);
+		GooglePlace gp = place.getPlaceDetails();
+		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
+		System.out.println(gl);
+		latitude = gl.getLatitude();
+		longitude = gl.getLongitude();
+		
+		model.addAttribute("latitude", latitude);
+		model.addAttribute("longitude", longitude);
+		Ranking ranking = new Ranking(latitude, longitude);
+		
+		model.addAttribute("ranking", ranking);
+	    
 		return "map";
 	}
 	
