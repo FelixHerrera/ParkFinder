@@ -9,13 +9,21 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class GooglePlacesService {
 	private static final String URL = "https://maps.googleapis.com/maps/api/place/textsearch/json?key={KEY}&query={location}";
-	private static final String URL2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key={KEY}&location={latitude},{longitude}&radius=20";
+	private static final String URL2 = "https://maps.googleapis.com/maps/api/place/details/json?key={KEY}placeid={placeID}";
 	private static final String KEY = "AIzaSyBxSJwn_0wag2TcejfFLG64oVHTtkuALCo";
 	private String location = "";
-
+	private String placeId = "";
 	public double latitude;
 	public double longitude;
 	
+	public String getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
+	}
+
 	@Autowired
 	private RestTemplate restTemplate = new RestTemplate();
 	
@@ -44,11 +52,13 @@ public class GooglePlacesService {
 		return longitude;
 	}
 	
+	
+	
 	public GooglePlace getPlaceDetails() {
 		System.out.println(URL);
 		System.out.println(KEY);
-		System.out.println(latitude);
-		System.out.println(longitude);
+//		System.out.println(latitude);
+//		System.out.println(longitude);
 		System.out.println(location);
 		
 		
@@ -59,4 +69,5 @@ public class GooglePlacesService {
 		System.out.println(gp);
 		return gp;
 	}
+	
 }

@@ -7,6 +7,9 @@ import java.util.List;
 
 public class Ranking {
 	
+	private final double DISTANCE_WEIGHT = 0.7;
+	private final double RATING_WEIGHT = 0.3;
+	
 	private List<NationalParkLocation> parks;
 	
 	public String toString(){
@@ -15,18 +18,33 @@ public class Ranking {
 	
 	public Ranking(double latitude, double longitude) {
 		parks = NationalParkLocation.getAllParkLocations();
+		for(NationalParkLocation npl: parks){
+			System.out.println(npl.getName());
+		}
 		rank(longitude, longitude);
 		
 		
+	}
+	
+	public List<NationalParkLocation> getRanking(){
+		for(NationalParkLocation npl: parks){
+			System.out.println(npl.getName());
+		}
+		return parks;
 	}
 	
 	
 	private boolean rank(double latitude, double longitude){
 		boolean rank = false;
 		HashMap<NationalParkLocation, Double> distanceScore = new HashMap();
+		HashMap<NationalParkLocation,Double> ratingScore = new HashMap();
 		
 		for(NationalParkLocation npl: parks){
 			distanceScore.put(npl, distance(latitude, longitude, npl));
+		}
+		
+		for(NationalParkLocation npl: parks){
+			ratingScore.put(npl, rating(npl));
 		}
 		
 		Collections.sort(parks, new Comparator<NationalParkLocation>() {
@@ -35,8 +53,13 @@ public class Ranking {
 			public int compare(NationalParkLocation npl1,
 					NationalParkLocation npl2) {
 					
-				Double score1 = distanceScore.get(npl1);
-				Double score2 = distanceScore.get(npl2);
+				Double distanceScore1 = distanceScore.get(npl1);
+				Double distanceScore2 = distanceScore.get(npl2);
+				Double ratingScore1 = ratingScore.get(npl1);
+				Double ratingScore2 = ratingScore.get(npl2);
+				
+				Double score1 = distanceScore1 * DISTANCE_WEIGHT + ratingScore1 * RATING_WEIGHT;
+				Double score2 = distanceScore2 * DISTANCE_WEIGHT + ratingScore2 * RATING_WEIGHT;
 				
 				if (score1 > score2){
 					return 1;
@@ -53,6 +76,8 @@ public class Ranking {
 			}
 			
 		});
+		
+		
 		
 						
 		return rank;
@@ -75,6 +100,14 @@ public class Ranking {
 		distance = 3961.0 * c;	
 			
 		return distance;
+	}
+	
+	private double rating(NationalParkLocation npl){
+		GooglePlacesService gps = new GooglePlacesService(npl.getName());
+		GooglePlace pgp = gps.getPlaceDetails();
+//		System.out.println(pgp.getRating());
+//		String placeId = pgp.getRating();
+		return pgp.getRating();
 	}
 
 }
