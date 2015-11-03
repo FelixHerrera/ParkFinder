@@ -16,10 +16,10 @@ public class NationalParkLocation {
 	
 	public static List<NationalParkLocation> getAllParkLocations(){
 		ArrayList<NationalParkLocation> result = new ArrayList();
-		result.add(new NationalParkLocation("New York", 3.0, 1.0));
-		result.add(new NationalParkLocation("Phoenix", 2.0, 8.0));
-		result.add(new NationalParkLocation("Dallas", 4.0, 9.0));
-		result.add(new NationalParkLocation("San Diego", 900.0, -1.0));
+		result.add(new NationalParkLocation("Glacier National Park", 48.76, -113.79));
+		result.add(new NationalParkLocation("Big Thicket National Preserve", 30.47, -94.35));
+		result.add(new NationalParkLocation("Arches National Park", 38.73, -109.59));
+		result.add(new NationalParkLocation("Rocky Mountain National Park", 40.34, -105.68));
 		return result;
 	}
 	
