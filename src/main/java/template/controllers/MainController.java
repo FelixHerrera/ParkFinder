@@ -42,13 +42,6 @@ public class MainController {
 		latitude = gl.getLatitude();
 		longitude = gl.getLongitude();
 		
-		String parkName = "Glacier National Park";
-		GooglePlacesService park = new GooglePlacesService(parkName);
-		GooglePlace pgp = park.getPlaceDetails();
-		System.out.println(pgp.getRating());
-//		String placeId = pgp.getRating();
-		
-		
 		model.addAttribute("latitude", latitude);
 		model.addAttribute("longitude", longitude);
 		Ranking ranking = new Ranking(latitude, longitude);
@@ -72,5 +65,15 @@ public class MainController {
 		System.out.println(place.getPlaceDetails());
 		model.addAttribute("place", place.getPlaceDetails());
 		return "googletest";
+	}
+	
+	@RequestMapping("/location")
+	public String location(Model model){
+		return "location";
+	}
+	
+	@RequestMapping("/locations")
+	public String locations(Model model){
+		return "locations";
 	}
 }
