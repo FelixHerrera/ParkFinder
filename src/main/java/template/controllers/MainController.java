@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import template.main.GoogleLocation;
 import template.main.GooglePlace;
 import template.main.GooglePlaces;
 import template.main.GooglePlacesService;
+import template.main.NationalParkLocation;
 
 import org.springframework.ui.Model;
 
@@ -63,13 +65,12 @@ public class MainController {
 		latitude = gl.getLatitude();
 		longitude = gl.getLongitude();
 		
-
-		
 		model.addAttribute("latitude", latitude);
 		model.addAttribute("longitude", longitude);
 		Ranking ranking = new Ranking(latitude, longitude);
+		List<NationalParkLocation> rankedParks = ranking.getRanking();
 		
-		model.addAttribute("ranking", ranking);
+		model.addAttribute("ranking", rankedParks);
 		
 		return "search";
 	}
@@ -87,5 +88,15 @@ public class MainController {
 		System.out.println(place.getPlaceDetails());
 		model.addAttribute("place", place.getPlaceDetails());
 		return "googletest";
+	}
+	
+	@RequestMapping("/location")
+	public String location(Model model){
+		return "location";
+	}
+	
+	@RequestMapping("/locations")
+	public String locations(Model model){
+		return "locations";
 	}
 }

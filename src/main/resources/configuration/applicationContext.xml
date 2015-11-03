@@ -15,7 +15,7 @@
 		<context:component-scan base-package="template.managed"/>
 		
 		<mvc:annotation-driven/>
-		
+		<bean class="org.springframework.web.client.RestTemplate"/>
 		<bean name="tomcatEmbeddedServletContainerFactory"  class="org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory"/>
 		<bean name="dispatcherServlet"  class="org.springframework.web.servlet.DispatcherServlet"/>
 		

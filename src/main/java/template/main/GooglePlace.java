@@ -10,6 +10,17 @@ public class GooglePlace {
 	private String name;
 	@JsonProperty("geometry")
 	private GoogleGeometry googleGeometry;
+	@JsonProperty("rating")
+	private double rating;
+
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+	
 	public String getName() {
 		return name;
 	}
