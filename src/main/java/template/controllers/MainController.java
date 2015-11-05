@@ -1,6 +1,7 @@
 package template.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,9 @@ import template.services.GooglePlacesService;
 
 @Controller
 public class MainController {
+	@Autowired
+	private GooglePlacesService gps;
+	
 	@RequestMapping("/")
 	public String home() {
 
@@ -37,8 +41,8 @@ public class MainController {
 		double latitude;
 		double longitude;
 		
-		GooglePlacesService place = new GooglePlacesService(locationName);
-		GooglePlace gp = place.getPlaceDetails();
+		//GooglePlacesService place = new GooglePlacesService(locationName);
+		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
 		System.out.println(gl);
 		latitude = gl.getLatitude();
@@ -58,8 +62,8 @@ public class MainController {
 		double latitude;
 		double longitude;
 		
-		GooglePlacesService place = new GooglePlacesService(locationName);
-		GooglePlace gp = place.getPlaceDetails();
+		//GooglePlacesService place = new GooglePlacesService(locationName);
+		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
 		System.out.println(gl);
 		latitude = gl.getLatitude();
