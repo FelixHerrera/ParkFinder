@@ -81,15 +81,6 @@ public class MainController {
 		return "modelTest";
 	}
 
-
-	@RequestMapping("/googletest")
-	public String displayjson(Model model){
-		GooglePlacesService place = new GooglePlacesService(31.549333, -97.1466695);
-		System.out.println(place.getPlaceDetails());
-		model.addAttribute("place", place.getPlaceDetails());
-		return "googletest";
-	}
-	
 	@RequestMapping("/location")
 	public String location(Model model){
 		return "location";
