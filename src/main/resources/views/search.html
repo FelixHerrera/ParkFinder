@@ -12,9 +12,7 @@
     <!-- endbuild -->
 
   </head>
-  <body>
-  	<p th:text="${latitude}" />
-   	<p th:text="${longitude}" />
-   	<p th:text="${ranking}" />
+  <body th:each="location: ${ranking}">
+   	<p th:text="${location}" />
   </body>
 </html>
