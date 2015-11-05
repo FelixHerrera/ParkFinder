@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import template.main.GooglePlace;
-import template.main.GooglePlaces;
+import template.googlePlaceConsumer.json.GooglePlace;
+import template.googlePlaceConsumer.json.GooglePlaces;
 
 
 

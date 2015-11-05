@@ -1,4 +1,4 @@
-package template.main;
+package template.googlePlaceConsumer.json;
 
 import java.util.ArrayList;
 

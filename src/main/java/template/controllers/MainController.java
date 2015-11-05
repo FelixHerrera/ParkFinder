@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import template.main.GoogleLocation;
-import template.main.GooglePlace;
+
+import template.googlePlaceConsumer.json.GoogleLocation;
+import template.googlePlaceConsumer.json.GooglePlace;
 import template.main.NationalParkLocation;
 
 import org.springframework.ui.Model;
