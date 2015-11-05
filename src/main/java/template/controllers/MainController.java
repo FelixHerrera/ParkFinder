@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import template.algorithm.Ranking;
 import template.googlePlaceConsumer.json.GoogleLocation;
 import template.googlePlaceConsumer.json.GooglePlace;
 
 import org.springframework.ui.Model;
 
-import template.main.Ranking;
 import template.models.NationalParkLocation;
 import template.services.GooglePlacesService;
 

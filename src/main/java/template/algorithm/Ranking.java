@@ -1,4 +1,4 @@
-package template.main;
+package template.algorithm;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,18 +15,9 @@ public class Ranking {
 	
 	private List<NationalParkLocation> parks;
 	
-	public String toString(){
-		return parks.toString();
-	}
-	
 	public Ranking(double latitude, double longitude) {
 		parks = NationalParkLocationService.getAllParkLocations();
-		for(NationalParkLocation npl: parks){
-			System.out.println(npl.getName());
-		}
 		rank(longitude, longitude);
-		
-		
 	}
 	
 	public List<NationalParkLocation> getRanking(){
@@ -112,6 +103,10 @@ public class Ranking {
 //		String placeId = pgp.getRating();
 		//return pgp.getRating();
 		return 0;
+	}
+
+	public String toString(){
+		return parks.toString();
 	}
 
 }
