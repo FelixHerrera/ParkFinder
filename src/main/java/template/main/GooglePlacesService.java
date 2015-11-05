@@ -10,11 +10,11 @@ import org.springframework.web.client.RestTemplate;
 public class GooglePlacesService {
 	private static final String URL = "https://maps.googleapis.com/maps/api/place/textsearch/json?key={KEY}&query={location}";
 	private static final String URL2 = "https://maps.googleapis.com/maps/api/place/details/json?key={KEY}placeid={placeID}";
-	private static final String KEY = "AIzaSyBxSJwn_0wag2TcejfFLG64oVHTtkuALCo";
+	
+//	private static final String FELIX_KEY = "AIzaSyBxSJwn_0wag2TcejfFLG64oVHTtkuALCo";
+	private static final String JONATHAN_KEY = "AIzaSyBIoKRR5QF4akp1qcGxfJwYTdhy8RTq_Tw";
 	private String location = "";
 	private String placeId = "";
-	public double latitude;
-	public double longitude;
 	
 	public String getPlaceId() {
 		return placeId;
@@ -31,39 +31,13 @@ public class GooglePlacesService {
 		this.location = location;
 	}
 	
-	public GooglePlacesService(double latitude, double longitude){
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
-	
-	public void setLatitude(double latitude){
-		this.latitude = latitude;
-	}
-	
-	public void setLongitude(double longitude){
-		this.longitude = longitude;
-	}
-	
-	public double getLatitude(){
-		return latitude;
-	}
-	
-	public double getLongitude(){
-		return longitude;
-	}
-	
-	
-	
 	public GooglePlace getPlaceDetails() {
 		System.out.println(URL);
-		System.out.println(KEY);
-//		System.out.println(latitude);
-//		System.out.println(longitude);
+		System.out.println(JONATHAN_KEY);
 		System.out.println(location);
-		
-		
+
 		GooglePlaces gps = restTemplate.getForObject(URL,
-				  GooglePlaces.class, KEY, location);
+				  GooglePlaces.class, JONATHAN_KEY, location);
 		System.out.println(gps);
 		GooglePlace gp = gps.getGooglePlaces().get(0);
 		System.out.println(gp);
