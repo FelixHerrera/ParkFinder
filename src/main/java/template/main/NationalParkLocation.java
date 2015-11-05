@@ -77,5 +77,9 @@ public class NationalParkLocation {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
+	
+	public String toString() {
+		return this.name + ":(" + this.latitude + ", " + this.longitude + ")";
+	}
 
 }
