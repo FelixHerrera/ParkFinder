@@ -5,6 +5,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import template.models.NationalParkLocation;
+import template.services.NationalParkLocationService;
+
 public class Ranking {
 	
 	private final double DISTANCE_WEIGHT = 0.7;
@@ -17,7 +20,7 @@ public class Ranking {
 	}
 	
 	public Ranking(double latitude, double longitude) {
-		parks = NationalParkLocation.getAllParkLocations();
+		parks = NationalParkLocationService.getAllParkLocations();
 		for(NationalParkLocation npl: parks){
 			System.out.println(npl.getName());
 		}

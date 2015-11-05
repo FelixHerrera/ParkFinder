@@ -9,11 +9,11 @@ import java.util.List;
 
 import template.googlePlaceConsumer.json.GoogleLocation;
 import template.googlePlaceConsumer.json.GooglePlace;
-import template.main.NationalParkLocation;
 
 import org.springframework.ui.Model;
 
 import template.main.Ranking;
+import template.models.NationalParkLocation;
 import template.services.GooglePlacesService;
 
 @Controller

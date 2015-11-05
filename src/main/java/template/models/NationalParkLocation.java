@@ -1,43 +1,14 @@
 package template.models;
 
 public class NationalParkLocation {
-	private int id;
-	private int latCoord;
-	private int longCoord;
 	private String name;
-	private int terrain;
+	private double longitude;
+	private double latitude;
 	
-	public NationalParkLocation() {}
-	
-	public NationalParkLocation(int latCoord, int longCoord, String name, int terrain) {
-		this.latCoord = latCoord;
-		this.longCoord = longCoord;
+	public NationalParkLocation(String name, double longitude, double latitude) {
 		this.name = name;
-		this.terrain = terrain;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getLatCoord() {
-		return latCoord;
-	}
-
-	public void setLatCoord(int latCoord) {
-		this.latCoord = latCoord;
-	}
-
-	public int getLongCoord() {
-		return longCoord;
-	}
-
-	public void setLongCoord(int longCoord) {
-		this.longCoord = longCoord;
+		this.longitude = longitude;
+		this.latitude = latitude;
 	}
 
 	public String getName() {
@@ -48,11 +19,24 @@ public class NationalParkLocation {
 		this.name = name;
 	}
 
-	public int getTerrain() {
-		return terrain;
+	public double getLongitude() {
+		return longitude;
 	}
 
-	public void setTerrain(int terrain) {
-		this.terrain = terrain;
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	
+	public String toString() {
+		return this.name + ":(" + this.latitude + ", " + this.longitude + ")";
+	}
+
 }
