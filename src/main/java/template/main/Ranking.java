@@ -103,11 +103,12 @@ public class Ranking {
 	}
 	
 	private double rating(NationalParkLocation npl){
-		GooglePlacesService gps = new GooglePlacesService(npl.getName());
-		GooglePlace pgp = gps.getPlaceDetails();
+		//GooglePlacesDBService gps = new GooglePlacesDBService(npl.getName());
+		//GooglePlace pgp = gps.getPlaceDetails();
 //		System.out.println(pgp.getRating());
 //		String placeId = pgp.getRating();
-		return pgp.getRating();
+		//return pgp.getRating();
+		return 0;
 	}
 
 }
