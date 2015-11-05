@@ -15,7 +15,7 @@ public class GooglePlacesService {
 	private static final String JONATHAN_KEY = "AIzaSyBIoKRR5QF4akp1qcGxfJwYTdhy8RTq_Tw";
 
 	@Autowired
-	private RestTemplate restTemplate = new RestTemplate();
+	private RestTemplate restTemplate;
 	
 	public GooglePlace getPlaceDetails(String locationName) {
 		System.out.println(URL);

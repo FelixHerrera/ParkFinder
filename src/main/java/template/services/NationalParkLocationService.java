@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -28,7 +29,6 @@ public class NationalParkLocationService {
 				if (!"Feature".equals(type)) {
 					continue;
 				}
-				System.out.println("Here");
 				JSONArray coordinates = jsonLocation.getJSONObject("geometry").getJSONArray("coordinates");
 				lat = coordinates.getDouble(0);
 				lon = coordinates.getDouble(1);
@@ -37,11 +37,9 @@ public class NationalParkLocationService {
 				result.add(new NationalParkLocation(name, lon, lat));
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO: log exception
 		}
 		return result;
 	}
