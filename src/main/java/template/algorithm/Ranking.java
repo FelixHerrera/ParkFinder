@@ -73,7 +73,7 @@ public class Ranking {
 		
 		
 		
-						
+		System.out.println("distanceRank: "+ distanceScore);				
 		return rank;
 	}
 	
@@ -83,16 +83,21 @@ public class Ranking {
 		double parkLat = 0.0;
 		double parkLong = 0.0;
 		
+		
 		parkLat = npl.getLatitude();
 		parkLong = npl.getLongitude();
+
 		
-		double dlat = latitude - parkLat;
-		double dlong = longitude - parkLong;
+		double dlat = Math.pow(latitude -parkLat, 2.0);
+		double dlong =Math.pow(longitude -parkLong, 2.0);
 		
-		double a = Math.pow(Math.sin(dlat/2.0),2.0) + Math.cos(parkLat)*Math.cos(latitude)* Math.pow(Math.sin(dlong/2.0),2.0);
-		double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		distance = 3961.0 * c;	
-			
+		
+		
+//		double a = Math.pow(Math.sin(dlat/2.0),2.0) + Math.cos(parkLat)*Math.cos(latitude)* Math.pow(Math.sin(dlong/2.0),2.0);
+//		double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+//		distance = 3961.0 * c;
+		distance = Math.sqrt(dlat+dlong);
+		System.out.println("distance :"+ distance);
 		return distance;
 	}
 	
