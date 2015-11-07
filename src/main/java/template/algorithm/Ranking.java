@@ -71,9 +71,11 @@ public class Ranking {
 			
 		});
 		
+		for(NationalParkLocation npl : parks) {
+			System.out.println(npl.getName() + ": " + this.distance(latitude, longitude, npl));
+		}
 		
-		
-		System.out.println("distanceRank: "+ distanceScore);				
+//		System.out.println("distanceRank: "+ distanceScore);				
 		return rank;
 	}
 	
