@@ -15,12 +15,16 @@ import template.googlePlaceConsumer.json.GooglePlace;
 import org.springframework.ui.Model;
 
 import template.models.NationalParkLocation;
+import template.services.AlgorithmService;
 import template.services.GooglePlacesService;
 
 @Controller
 public class MainController {
 	@Autowired
 	private GooglePlacesService gps;
+	
+	@Autowired
+	private AlgorithmService as;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -50,7 +54,7 @@ public class MainController {
 		
 		model.addAttribute("latitude", latitude);
 		model.addAttribute("longitude", longitude);
-		Ranking ranking = new Ranking(latitude, longitude);
+		Ranking ranking = as.getRanking(latitude, longitude);
 		
 		model.addAttribute("ranking", ranking);
 	    
