@@ -39,27 +39,4 @@ public class RankingTest {
 		assertTrue(distance > 80.0);
 		assertTrue(distance < 90.0);
 	}
-	
-	@Test
-	public void wacoToNatchezDistance() {
-		NationalParkLocation testPark = new NationalParkLocation("Natchez", 33.8, -89.2);
-		double wacoLat = 31.6;
-		double wacoLong = -97.2;
-		double distance = Ranking.distance(wacoLat, wacoLong, testPark);
-		System.out.println(distance);
-		assertTrue(distance > 550.0);
-		assertTrue(distance < 600.0);
-	}
-	
-	@Test
-	public void wacoToSamoaDistance() {
-		NationalParkLocation testPark = new NationalParkLocation("Samoa", -14.2, -170.1);
-		double wacoLat = 31.6;
-		double wacoLong = -97.2;
-		double distance = Ranking.distance(wacoLat, wacoLong, testPark);
-		System.out.println(distance);
-		assertTrue(distance > 4900.0);
-		assertTrue(distance < 5000.0);
-	}
-
 }

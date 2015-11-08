@@ -19,7 +19,7 @@ public class Ranking {
 	
 	public Ranking(double latitude, double longitude, NationalParkLocationService npls) {
 		parks = npls.getAllParkLocations();
-		rank(longitude, longitude);
+		rank(latitude, longitude);
 	}
 	
 	public List<NationalParkLocation> getRanking(){
@@ -74,7 +74,8 @@ public class Ranking {
 		});
 		
 		for(NationalParkLocation npl : parks) {
-			System.out.println(npl.getName() + ": " + this.distance(latitude, longitude, npl));
+			System.out.println(latitude + ", " + longitude);
+			System.out.println(npl + ": " + this.distance(latitude, longitude, npl));
 		}
 		
 //		System.out.println("distanceRank: "+ distanceScore);				
