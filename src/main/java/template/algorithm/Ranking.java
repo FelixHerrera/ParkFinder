@@ -7,16 +7,18 @@ import java.util.List;
 
 import template.models.NationalParkLocation;
 import template.services.NationalParkLocationService;
+import template.services.NationalParkLocationServiceImpl;
 
 public class Ranking {
 	
-	private final double DISTANCE_WEIGHT = 0.7;
-	private final double RATING_WEIGHT = 0.3;
+	private final static double DISTANCE_WEIGHT = 0.7;
+	private final static double RATING_WEIGHT = 0.3;
+	private final static double RADIUS_OF_EARTH = 3959.0;
 	
 	private List<NationalParkLocation> parks;
 	
-	public Ranking(double latitude, double longitude) {
-		parks = NationalParkLocationService.getAllParkLocations();
+	public Ranking(double latitude, double longitude, NationalParkLocationService npls) {
+		parks = npls.getAllParkLocations();
 		rank(longitude, longitude);
 	}
 	
@@ -79,26 +81,37 @@ public class Ranking {
 		return rank;
 	}
 	
-	private double distance(double latitude, double longitude, NationalParkLocation npl){
+	public static double distance(double latitude, double longitude, NationalParkLocation npl){
 		
 		double distance = 0.0;
 		double parkLat = 0.0;
 		double parkLong = 0.0;
 		
+		latitude = latitude * Math.PI / 180.0;
+		longitude = longitude * Math.PI / 180.0;
 		
 		parkLat = npl.getLatitude();
+		parkLat = parkLat * Math.PI / 180.0;
 		parkLong = npl.getLongitude();
+		parkLong = parkLong * Math.PI / 180.0;
+		
 
 		
-		double dlat = Math.pow(latitude -parkLat, 2.0);
-		double dlong =Math.pow(longitude -parkLong, 2.0);
+		double dlat = latitude - parkLat;
+		double dlong = longitude - parkLong;
+		System.out.println(dlong);
 		
+		double dx = dlong * Math.cos((latitude + parkLat)/2.0);
+		double dy = dlat;
+		System.out.println(dx);
+		distance = RADIUS_OF_EARTH * Math.sqrt(dx*dx + dy*dy);
 		
 		
 //		double a = Math.pow(Math.sin(dlat/2.0),2.0) + Math.cos(parkLat)*Math.cos(latitude)* Math.pow(Math.sin(dlong/2.0),2.0);
 //		double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 //		distance = 3961.0 * c;
-		distance = Math.sqrt(dlat+dlong);
+//		distance = Math.sqrt(dlat+dlong);
+		
 		System.out.println("distance :"+ distance);
 		return distance;
 	}

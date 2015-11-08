@@ -5,7 +5,7 @@ public class NationalParkLocation {
 	private double longitude;
 	private double latitude;
 	
-	public NationalParkLocation(String name, double longitude, double latitude) {
+	public NationalParkLocation(String name, double latitude, double longitude) {
 		this.name = name;
 		this.longitude = longitude;
 		this.latitude = latitude;
