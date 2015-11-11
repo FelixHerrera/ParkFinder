@@ -1,6 +1,7 @@
 package template.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +18,7 @@ public class GooglePlacesService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Cacheable(value = "getPlaceDetails")
 	public GooglePlace getPlaceDetails(String locationName) {
 		GooglePlaces gps = restTemplate.getForObject(URL,
 				  GooglePlaces.class, JONATHAN_KEY, locationName);
