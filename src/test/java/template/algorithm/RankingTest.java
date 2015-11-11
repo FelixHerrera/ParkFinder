@@ -2,6 +2,9 @@ package template.algorithm;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import template.main.CustomEmbeddedWebApplicationContext;
 import template.models.NationalParkLocation;
 import template.services.AlgorithmService;
+import template.services.NationalParkLocationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("../../configuration/applicationContext.xml")
@@ -19,24 +23,42 @@ public class RankingTest {
 	@Autowired
 	AlgorithmService as;
 	
+	private static final NationalParkLocation newYorkPark = new NationalParkLocation("New York", 40.7, -74.0);
+	private static final NationalParkLocation dallasPark = new NationalParkLocation("Dallas", 32.8, -96.8);
+	private static final NationalParkLocation phoenixPark = new NationalParkLocation("Phoenix", 33.5, -112.1);
+	
+	private static final double wacoLat = 31.6;
+	private static final double wacoLong = -97.2;
+	
 	@Test
 	public void wacoToNewYorkDistance() {
-		NationalParkLocation testPark = new NationalParkLocation("New York", 40.7, -74.0);
-		double wacoLat = 31.6;
-		double wacoLong = -97.2;
-		double distance = Ranking.distance(wacoLat, wacoLong, testPark);
-		System.out.println(distance);
+		double distance = Ranking.distance(wacoLat, wacoLong, newYorkPark);
 		assertTrue(distance > 1000.0);
 	}
 	
 	@Test
 	public void wacoToDallasDistance() {
-		NationalParkLocation testPark = new NationalParkLocation("Dallas", 32.8, -96.8);
-		double wacoLat = 31.6;
-		double wacoLong = -97.2;
-		double distance = Ranking.distance(wacoLat, wacoLong, testPark);
-		System.out.println(distance);
+		double distance = Ranking.distance(wacoLat, wacoLong, dallasPark);
 		assertTrue(distance > 80.0);
 		assertTrue(distance < 90.0);
 	}
+	
+	@Test
+	public void rankingTest() {
+		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService() {
+			@Override
+			public List<NationalParkLocation> getAllParkLocations() {
+				List<NationalParkLocation> result = new ArrayList<NationalParkLocation>();
+				result.add(newYorkPark);
+				result.add(dallasPark);
+				result.add(phoenixPark);
+				return result;
+			}
+		});
+		List<NationalParkLocation> rankingList = ranking.getRanking();
+		assertEquals(dallasPark, rankingList.get(0));
+		assertEquals(phoenixPark, rankingList.get(1));
+		assertEquals(newYorkPark, rankingList.get(2));
+	}
+
 }

@@ -18,15 +18,9 @@ public class GooglePlacesService {
 	private RestTemplate restTemplate;
 	
 	public GooglePlace getPlaceDetails(String locationName) {
-		System.out.println(URL);
-		System.out.println(JONATHAN_KEY);
-		System.out.println(locationName);
-
 		GooglePlaces gps = restTemplate.getForObject(URL,
 				  GooglePlaces.class, JONATHAN_KEY, locationName);
-		System.out.println(gps);
 		GooglePlace gp = gps.getGooglePlaces().get(0);
-		System.out.println(gp);
 		return gp;
 	}
 	

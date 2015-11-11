@@ -22,5 +22,4 @@ public class GoogleLocation {
 		this.longitude = longitude;
 	}
 
-	
 }

@@ -23,12 +23,8 @@ public class Ranking {
 	}
 	
 	public List<NationalParkLocation> getRanking(){
-		for(NationalParkLocation npl: parks){
-			System.out.println(npl.getName());
-		}
 		return parks;
 	}
-	
 	
 	private boolean rank(double latitude, double longitude){
 		boolean rank = false;
@@ -72,13 +68,6 @@ public class Ranking {
 			}
 			
 		});
-		
-		for(NationalParkLocation npl : parks) {
-			System.out.println(latitude + ", " + longitude);
-			System.out.println(npl + ": " + this.distance(latitude, longitude, npl));
-		}
-		
-//		System.out.println("distanceRank: "+ distanceScore);				
 		return rank;
 	}
 	
@@ -100,11 +89,9 @@ public class Ranking {
 		
 		double dlat = latitude - parkLat;
 		double dlong = longitude - parkLong;
-		System.out.println(dlong);
 		
 		double dx = dlong * Math.cos((latitude + parkLat)/2.0);
 		double dy = dlat;
-		System.out.println(dx);
 		distance = RADIUS_OF_EARTH * Math.sqrt(dx*dx + dy*dy);
 		
 		
@@ -113,14 +100,12 @@ public class Ranking {
 //		distance = 3961.0 * c;
 //		distance = Math.sqrt(dlat+dlong);
 		
-		System.out.println("distance :"+ distance);
 		return distance;
 	}
 	
 	private double rating(NationalParkLocation npl){
 		//GooglePlacesDBService gps = new GooglePlacesDBService(npl.getName());
 		//GooglePlace pgp = gps.getPlaceDetails();
-//		System.out.println(pgp.getRating());
 //		String placeId = pgp.getRating();
 		//return pgp.getRating();
 		return 0;

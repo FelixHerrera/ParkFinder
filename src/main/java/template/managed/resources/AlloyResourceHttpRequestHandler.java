@@ -99,7 +99,6 @@ public class AlloyResourceHttpRequestHandler extends ResourceHttpRequestHandler 
 		
 		Resource[] resources;
 		try {
-			System.out.println(path);
 			resources = applicationContext.getResources("/resources" + path);
 		} catch (IOException e) {
 			throw Throwables.propagate(e);

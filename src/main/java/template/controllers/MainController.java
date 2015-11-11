@@ -1,6 +1,8 @@
 package template.controllers;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import java.util.List;
 import template.algorithm.Ranking;
 import template.googlePlaceConsumer.json.GoogleLocation;
 import template.googlePlaceConsumer.json.GooglePlace;
+import template.managed.resources.AlloyResourceHttpRequestHandler;
 
 import org.springframework.ui.Model;
 
@@ -21,6 +24,8 @@ import template.services.NationalParkLocationService;
 
 @Controller
 public class MainController {
+	private static final Logger logger = LogManager.getLogger(MainController.class);
+	
 	@Autowired
 	private GooglePlacesService gps;
 	@Autowired
@@ -42,16 +47,14 @@ public class MainController {
 	    model.addAttribute("locationName", locationName);
 	    model.addAttribute("maxDistance", maxDistance);
 	    
-	    System.out.println(maxDistance);
-	    System.out.println(locationName);
-
 		double latitude;
 		double longitude;
 		
-		//GooglePlacesService place = new GooglePlacesService(locationName);
 		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
-		System.out.println(gl);
+		
+		logger.debug(gl);
+		
 		latitude = gl.getLatitude();
 		longitude = gl.getLongitude();
 		
@@ -66,15 +69,14 @@ public class MainController {
 	
 	@RequestMapping("/search")
 	public String search(@RequestParam(required=true) String locationName, Model model){
-		double latitude;
-		double longitude;
 		
-		//GooglePlacesService place = new GooglePlacesService(locationName);
 		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
-		System.out.println(gl);
-		latitude = gl.getLatitude();
-		longitude = gl.getLongitude();
+		
+		logger.debug("Given google location: " + gl);
+		
+		double latitude = gl.getLatitude();
+		double longitude = gl.getLongitude();
 		
 		model.addAttribute("latitude", latitude);
 		model.addAttribute("longitude", longitude);
