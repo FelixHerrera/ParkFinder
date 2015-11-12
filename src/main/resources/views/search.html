@@ -2,17 +2,116 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>ModelTest</title>
+    <title>Ranking Return</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <style type="text/css">
+      #map { 
+		  height: 80%;
+		  background-size: cover;
+		  border-radius: 5px;
+		  border: 1px solid lightgray;
+		  height: 100%;
+		  position: relative;
+	  }
+    </style>
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/global.css">
     <!-- endbuild -->
 
   </head>
-  <body th:each="location: ${ranking}">
+  <body>
+   <div class="promo">
+      <div class="promo-mask">
+        
+        <nav class="navbar navbar-default navbar-static-top navbar-home" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">
+                <img class="logo-svg" src="/images/plane.svg">
+                <h3 class="logo-text">ParkFinder</h3>
+              </a>
+            </div>
+          </div>
+        </nav>
+       </div>
+      </div>
+  <div id = "location_div" th:each="location: ${ranking}">
    	<p th:text="${location}" />
-  </body>
+	</div>
+   	<div class="map-outer-container">
+      <div class="map-container">
+
+<div id="map">
+        </div>
+			<script th:inline = "javascript">
+			/*<![CDATA[*/
+			//var name = /*[[${session.location.name}]]*/ ;
+			//var latitude = /*[[${session.location.latitude}]]*/ ;
+			//var longitude = /*[[${session.location.longitude}]]*/ ;
+			/*]]>*/
+			var test = []
+			test = document.getElementById('location_div');
+			// console.log(name + latitude + longitude);
+			
+			function initMap() {
+			 var locations = [
+				  ['Bondi Beach', -33.890542, 151.274856, 4],
+				  ['Coogee Beach', -33.923036, 151.259052, 5],
+				  ['Cronulla Beach', -34.028249, 151.157507, 3],
+				  ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+				  ['Maroubra Beach', -33.950198, 151.259302, 1]
+				];
+
+				var map = new google.maps.Map(document.getElementById('map'), {
+				  zoom: 10,
+				  center: new google.maps.LatLng(-33.92, 151.25),
+				  mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+
+				var infowindow = new google.maps.InfoWindow();
+
+				var marker, i;
+
+				for (i = 0; i < locations.length; i++) {  
+				  marker = new google.maps.Marker({
+					position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+					map: map
+				  });
+
+				  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+					return function() {
+					  infowindow.setContent(locations[i][0]);
+					  infowindow.open(map, marker);
+					}
+				  })(marker, i));
+				}
+			}
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5eYzsn2LHNmUASOhcvqVg6wzgn4KO4BI &callback=initMap">
+    </script>
+      </div>  
+    </div>
+      </div>  
+    </div>
+       
+	
+	
+ <div class="footer">
+      <div class="container-fluid">
+        Built with love from the Credera team and Clarissa and Kristen
+      </div>
+    </div>	
+    
+
+    <!-- build:js scripts/main.js -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- endbuild -->
+</body>
 </html>
+ 
