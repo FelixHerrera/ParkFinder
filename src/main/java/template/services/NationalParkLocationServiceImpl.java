@@ -36,7 +36,8 @@ public class NationalParkLocationServiceImpl implements NationalParkLocationServ
 				lat = coordinates.getDouble(1);
 				JSONObject properties = jsonLocation.getJSONObject("properties");
 				String name = properties.getString("UNIT_NAME");
-				result.add(new NationalParkLocation(name, lat, lon));
+				String terrain = properties.getString("UNIT_TYPE");
+				result.add(new NationalParkLocation(name, lat, lon, terrain));
 			}
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {

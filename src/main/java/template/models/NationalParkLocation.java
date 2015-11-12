@@ -4,11 +4,21 @@ public class NationalParkLocation {
 	private String name;
 	private double longitude;
 	private double latitude;
+	private String terrain;
 	
-	public NationalParkLocation(String name, double latitude, double longitude) {
+	public NationalParkLocation(String name, double latitude, double longitude, String terrain) {
 		this.name = name;
 		this.longitude = longitude;
 		this.latitude = latitude;
+		this.terrain = terrain;
+	}
+
+	public String getTerrain() {
+		return terrain;
+	}
+
+	public void setTerrain(String terrain) {
+		this.terrain = terrain;
 	}
 
 	public String getName() {
@@ -36,7 +46,7 @@ public class NationalParkLocation {
 	}
 	
 	public String toString() {
-		return this.name + ":(" + this.latitude + ", " + this.longitude + ")";
+		return this.name + ":(" + this.latitude + ", " + this.longitude + ")" + " terrain: " + this.terrain;
 	}
 
 }
