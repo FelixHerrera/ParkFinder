@@ -6,7 +6,7 @@
     <title>VacationFinder</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/global.css">
@@ -20,7 +20,7 @@
 
     <div class="promo">
       <div class="promo-mask">
-        
+
         <nav class="navbar navbar-default navbar-static-top navbar-home" role="navigation">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -50,53 +50,39 @@
             Start Here
           </h2>
           <p class="text-center housing-form-summary">
-            Let's find a destination that best matches you. 
+            Let's find a destination that best matches you.
           </p>
-          <form action="#">
+          <form action="/search">
             <div class="form-group">
-              <label for="">
-                Location
-              </label>
-              <input type="text" class="form-control" placeholder="Country, City..." />
+            <label for="">
+              Location
+            </label>
+            <input type="text" name="locationName" class="form-control" placeholder="Country, City..." />
             </div>
             <div class="form-group">
-              <label for="">
-                Budget
-              </label>
-              <select name="" id="" class="form-control">
-                <option value="0-25">Below $500</option>
-                <option value="25-50">Above $500</option>
-                <option value="50-75">Above $1K</option>
-                <option value="75-100">Above $2K</option>
-                <option value="100+">Above $5K</option>
-              </select>
+              <label>Maximum Distance From Location</label>
+              <input id="toggleMaxDistance" type="checkbox">
+              <div id="maxDistanceContainer" hidden=true>
+                <input type="number" name="maxDistance" class="form-control" min="0" max="2000" step="5" value="0">
+              </div>
             </div>
             <div class="form-group">
-              <label for="">Group Size</label>
-               <input type="text" class="form-control" placeholder="Group Size" />
+              <label>Terrain Type</label>
+              <input id="toggleTerrainType" type="checkbox">
+              <div id="terrainTypeContainer" hidden=true>
+                <input type="radio" name="terrainType" class="form-control" value="NoPreference" checked>No Preference
+                <input type="radio" name="terrainType" class="form-control">
+                <input type="radio" name="terrainType" class="form-control">
+              </div>
             </div>
             <div class="form-group">
-              <label for="">Age Range</label>
-              <select name="" id="" class="form-control">
-                <option value="">20's</option>
-                <option value="">30's</option>
-                <option value="">40's</option>
-                <option value="">50's</option>
-                <option value="">60's</option>
-              </select>
+              <label>Size of Park</label>
+              <input id="toggleMaxDistance" type="checkbox">
+              <div id="maxDistanceContainer" hidden=true>
+                <input type="number" name="maxDistance" id="maxDistance" class="form-control" min="0" max="2000" step="5" value="0">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="">Vacation Type</label>
-              <select name="" id="" class="form-control">
-                <option value="">Beach</option>
-                <option value="">Low-key</option>
-                <option value="">Adventure</option>
-                <option value="">Sight Seeing</option>
-                <option value="">Kid Friendly</option>
-                <option value="">Resort</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Find Vacations</button>
+            <button type="submit" class="btn btn-primary">Search</button>
           </form>
         </div>
       </div>
@@ -104,7 +90,7 @@
 
     <div class="footer">
       <div class="container-fluid">
-        Built with love from the Credera team  
+        Built with love from the Credera team
       </div>
     </div>
 
