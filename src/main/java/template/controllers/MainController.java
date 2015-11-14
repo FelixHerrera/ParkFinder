@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 import template.algorithm.Ranking;
+import template.criteria.Criteria;
+import template.criteria.CriteriaFactory;
 import template.googlePlaceConsumer.json.GoogleLocation;
 import template.googlePlaceConsumer.json.GooglePlace;
 import template.managed.resources.AlloyResourceHttpRequestHandler;
@@ -77,6 +79,17 @@ public class MainController {
 		
 		double latitude = gl.getLatitude();
 		double longitude = gl.getLongitude();
+		
+		CriteriaFactory CFactory = new CriteriaFactory();
+		if (terrainType != null) {
+			Criteria terrainCriteria = CFactory.createCriteria("terrain", terrainType);
+		}
+		if (parkSize != null) {
+			Criteria sizeCriteria = CFactory.createCriteria("size", size);
+		}
+		if (maxDistance != null) {
+			Criteria distanceCriteria = CFactory.createCriteria("distance", distance);
+		}
 		
 		model.addAttribute("latitude", latitude);
 		model.addAttribute("longitude", longitude);
