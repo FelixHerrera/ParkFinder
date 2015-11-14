@@ -68,7 +68,16 @@ public class MainController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(@RequestParam(required=true) String locationName, Model model){
+	public String search(@RequestParam(required=true) String locationName,
+			             @RequestParam(required=false) String maxDistance, 
+			             @RequestParam(required=false) String terrainType,
+						 @RequestParam(required=false) String parkSize, Model model){
+		
+		System.out.println(locationName);
+		System.out.println(maxDistance);
+		System.out.println(terrainType);
+		System.out.println(parkSize);
+		
 		
 		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
