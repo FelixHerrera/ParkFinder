@@ -2,7 +2,7 @@ package template.criteria;
 
 import template.models.NationalParkLocation;
 
-public class TerrainCriteria implements CriteriaFactory {
+public class TerrainCriteria implements Criteria {
 	
 	private String terrainType; 
 	

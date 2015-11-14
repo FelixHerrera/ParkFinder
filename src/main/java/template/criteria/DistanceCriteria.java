@@ -2,12 +2,12 @@ package template.criteria;
 
 import template.models.NationalParkLocation;
 
-public class DistanceCriteria implements CriteriaFactory {
+public class DistanceCriteria implements Criteria {
 	
 	private double maxDistance;
 	
-	public DistanceCriteria(double maxDistance) {
-		this.maxDistance = maxDistance;
+	public DistanceCriteria(String maxDistance) {
+		this.maxDistance = Double.parseDouble(maxDistance);
 	}
 
 	@Override

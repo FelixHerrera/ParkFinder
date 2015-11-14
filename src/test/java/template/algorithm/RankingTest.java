@@ -32,13 +32,13 @@ public class RankingTest {
 	
 	@Test
 	public void wacoToNewYorkDistance() {
-		double distance = Ranking.distance(wacoLat, wacoLong, newYorkPark);
+		double distance = newYorkPark.distance(wacoLat, wacoLong);
 		assertTrue(distance > 1000.0);
 	}
 	
 	@Test
 	public void wacoToDallasDistance() {
-		double distance = Ranking.distance(wacoLat, wacoLong, dallasPark);
+		double distance = dallasPark.distance(wacoLat, wacoLong);
 		assertTrue(distance > 80.0);
 		assertTrue(distance < 90.0);
 	}

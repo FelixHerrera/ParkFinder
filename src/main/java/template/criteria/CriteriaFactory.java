@@ -1,8 +1,17 @@
 package template.criteria;
 
-import template.models.NationalParkLocation;
+public class CriteriaFactory {
 
-public interface CriteriaFactory {
-	
-	public boolean fitCriteria(NationalParkLocation npl);
+	public Criteria createCriteria(String criteriaType, String param) {
+		if (criteriaType == "terrain") {
+			return new TerrainCriteria(param);
+		}
+		if (criteriaType == "distance") {
+			return new DistanceCriteria(param);
+		}
+		if (criteriaType == "size") {
+			return new SizeCriteria(param);
+		}
+		return null;
+	}
 }
