@@ -75,11 +75,12 @@ public class MainController {
 			             @RequestParam(required=false) String terrainType,
 						 @RequestParam(required=false) String parkSize, Model model){
 		
+		System.out.println("The following values can be found int \"search\"" +
+				" within the MainController, pulled from the client side.");
 		System.out.println(locationName);
 		System.out.println(maxDistance);
 		System.out.println(terrainType);
 		System.out.println(parkSize);
-		
 		
 		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
@@ -94,10 +95,10 @@ public class MainController {
 			Criteria terrainCriteria = CFactory.createCriteria("terrain", terrainType);
 		}
 		if (parkSize != null) {
-			Criteria sizeCriteria = CFactory.createCriteria("size", size);
+			Criteria sizeCriteria = CFactory.createCriteria("size", parkSize);
 		}
 		if (maxDistance != null) {
-			Criteria distanceCriteria = CFactory.createCriteria("distance", distance);
+			Criteria distanceCriteria = CFactory.createCriteria("distance", maxDistance);
 		}
 		
 		model.addAttribute("latitude", latitude);
