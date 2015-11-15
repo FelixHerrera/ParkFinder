@@ -1,10 +1,12 @@
 package template.algorithm;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import template.criteria.Criteria;
 import template.models.NationalParkLocation;
 import template.services.NationalParkLocationService;
 import template.services.NationalParkLocationServiceImpl;
@@ -16,16 +18,18 @@ public class Ranking {
 	
 	private List<NationalParkLocation> parks;
 	
-	public Ranking(double latitude, double longitude, NationalParkLocationService npls) {
+	public Ranking(double latitude, double longitude, NationalParkLocationService npls, 
+			Criteria terrain, Criteria distance, Criteria size) {
 		parks = npls.getAllParkLocations();
-		rank(latitude, longitude);
+		rank(latitude, longitude, terrain, distance, size);
 	}
 	
 	public List<NationalParkLocation> getRanking(){
 		return parks;
 	}
 	
-	private boolean rank(double latitude, double longitude){
+	private boolean rank(double latitude, double longitude, Criteria terrain,
+			Criteria distance, Criteria size){
 		boolean rank = false;
 		HashMap<NationalParkLocation, Double> distanceScore = new HashMap();
 		HashMap<NationalParkLocation,Double> ratingScore = new HashMap();
@@ -67,6 +71,23 @@ public class Ranking {
 			}
 			
 		});
+		
+		// Filter by criteria
+		if (terrain != null) {
+			ArrayList<NationalParkLocation> toRemove = new ArrayList<NationalParkLocation>();
+			System.out.println("Found terrain criteria");
+			for (NationalParkLocation npl : parks) {
+				if (terrain.fitCriteria(npl) == false) {
+					toRemove.add(npl);
+				}
+			}
+			System.out.println(toRemove.toString());
+			for (NationalParkLocation npl : toRemove) {
+				parks.remove(npl);
+			}
+		}
+		System.out.println(parks.toString());
+
 		return rank;
 	}
 	

@@ -45,7 +45,7 @@ public class RankingTest {
 	
 	@Test
 	public void rankingTest() {
-		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService() {
+		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService(), null, null, null {
 			@Override
 			public List<NationalParkLocation> getAllParkLocations() {
 				List<NationalParkLocation> result = new ArrayList<NationalParkLocation>();

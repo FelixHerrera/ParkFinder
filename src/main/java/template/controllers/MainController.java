@@ -91,19 +91,26 @@ public class MainController {
 		double longitude = gl.getLongitude();
 		
 		CriteriaFactory CFactory = new CriteriaFactory();
-		if (terrainType != null) {
-			Criteria terrainCriteria = CFactory.createCriteria("terrain", terrainType);
+		Criteria terrainCriteria = null;
+		Criteria sizeCriteria = null;
+		Criteria distanceCriteria = null;
+		if (!terrainType.equals("NoPreference")) {
+			System.out.println("Creating terrain criteria");
+			terrainCriteria = CFactory.createCriteria("terrain", terrainType);
 		}
-		if (parkSize != null) {
-			Criteria sizeCriteria = CFactory.createCriteria("size", parkSize);
+		if (!parkSize.equals("NoPreference")) {
+			System.out.println("Creating size criteria");
+			sizeCriteria = CFactory.createCriteria("size", parkSize);
 		}
-		if (maxDistance != null) {
-			Criteria distanceCriteria = CFactory.createCriteria("distance", maxDistance);
+		if (!maxDistance.equals("0")) {
+			System.out.println("Creating distance criteria");
+			distanceCriteria = CFactory.createCriteria("distance", maxDistance);
 		}
 		
 		model.addAttribute("latitude", latitude);
 		model.addAttribute("longitude", longitude);
-		Ranking ranking = new Ranking(latitude, longitude, npls);
+		Ranking ranking = new Ranking(latitude, longitude, npls, terrainCriteria, distanceCriteria, 
+				sizeCriteria);
 		List<NationalParkLocation> rankedParks = ranking.getRanking();
 		
 		model.addAttribute("ranking", rankedParks);
