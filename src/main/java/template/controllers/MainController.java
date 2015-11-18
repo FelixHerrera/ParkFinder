@@ -104,6 +104,7 @@ public class MainController {
 		}
 		if (!maxDistance.equals("0")) {
 			System.out.println("Creating distance criteria");
+			maxDistance = maxDistance + "," + String.valueOf(latitude) + "," + String.valueOf(longitude);
 			distanceCriteria = CFactory.createCriteria("distance", maxDistance);
 		}
 		
