@@ -13,6 +13,9 @@ public class DistanceCriteria implements Criteria {
 		this.maxDistance = Double.parseDouble(parts[0]);
 		this.latitude = Double.parseDouble(parts[1]);
 		this.longitude = Double.parseDouble(parts[2]);
+		System.out.println(maxDistance);
+		System.out.println(latitude);
+		System.out.println(longitude);
 	}
 
 	@Override

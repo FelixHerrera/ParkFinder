@@ -103,7 +103,9 @@ public class Ranking {
 			}
 		}
 		System.out.println("After distance removal");
-		System.out.println(parks.toString());
+		for (NationalParkLocation npl : parks) {
+			System.out.println(npl.toString() + " distance: " + npl.distance(latitude, longitude));
+		}
 		
 		return rank;
 	}
