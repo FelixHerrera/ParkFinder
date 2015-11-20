@@ -78,8 +78,7 @@ public class MainController {
 		double latitude = gl.getLatitude();
 		double longitude = gl.getLongitude();
 		
-		model.addAttribute("latitude", latitude);
-		model.addAttribute("longitude", longitude);
+		model.addAttribute("gl", gl);
 		Ranking ranking = new Ranking(latitude, longitude, npls);
 		List<NationalParkLocation> rankedParks = ranking.getRanking();
 		
