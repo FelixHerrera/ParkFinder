@@ -45,7 +45,7 @@ public class RankingTest {
 	
 	@Test
 	public void rankingTest() {
-		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService(), null, null, null {
+		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService() {
 			@Override
 			public List<NationalParkLocation> getAllParkLocations() {
 				List<NationalParkLocation> result = new ArrayList<NationalParkLocation>();
@@ -54,7 +54,7 @@ public class RankingTest {
 				result.add(phoenixPark);
 				return result;
 			}
-		});
+		}, null, null, null);
 		List<NationalParkLocation> rankingList = ranking.getRanking();
 		assertEquals(dallasPark, rankingList.get(0));
 		assertEquals(phoenixPark, rankingList.get(1));
