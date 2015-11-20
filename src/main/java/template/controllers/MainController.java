@@ -104,11 +104,11 @@ public class MainController {
 		}
 		if (!maxDistance.equals("0")) {
 			System.out.println("Creating distance criteria");
+			maxDistance = maxDistance + "," + String.valueOf(latitude) + "," + String.valueOf(longitude);
 			distanceCriteria = CFactory.createCriteria("distance", maxDistance);
 		}
 		
-		model.addAttribute("latitude", latitude);
-		model.addAttribute("longitude", longitude);
+		model.addAttribute("gl", gl);
 		Ranking ranking = new Ranking(latitude, longitude, npls, terrainCriteria, distanceCriteria, 
 				sizeCriteria);
 		List<NationalParkLocation> rankedParks = ranking.getRanking();

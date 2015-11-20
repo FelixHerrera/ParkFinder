@@ -86,8 +86,27 @@ public class Ranking {
 				parks.remove(npl);
 			}
 		}
+		System.out.println("After terrain removal");
 		System.out.println(parks.toString());
-
+		
+		if (distance != null) {
+			ArrayList<NationalParkLocation> toRemove = new ArrayList<NationalParkLocation>();
+			System.out.println("Found distance criteria");
+			for (NationalParkLocation npl: parks) {
+				if (distance.fitCriteria(npl) == false) {
+					toRemove.add(npl);
+				}
+			}
+			System.out.println(toRemove.toString());
+			for (NationalParkLocation npl : toRemove) {
+				parks.remove(npl);
+			}
+		}
+		System.out.println("After distance removal");
+		for (NationalParkLocation npl : parks) {
+			System.out.println(npl.toString() + " distance: " + npl.distance(latitude, longitude));
+		}
+		
 		return rank;
 	}
 	
