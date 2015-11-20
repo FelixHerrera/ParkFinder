@@ -23,29 +23,29 @@ public class RankingTest {
 	@Autowired
 	AlgorithmService as;
 	
-	private static final NationalParkLocation newYorkPark = new NationalParkLocation("New York", 40.7, -74.0);
-	private static final NationalParkLocation dallasPark = new NationalParkLocation("Dallas", 32.8, -96.8);
-	private static final NationalParkLocation phoenixPark = new NationalParkLocation("Phoenix", 33.5, -112.1);
+	private static final NationalParkLocation newYorkPark = new NationalParkLocation("New York", 40.7, -74.0, "City");
+	private static final NationalParkLocation dallasPark = new NationalParkLocation("Dallas", 32.8, -96.8, "City");
+	private static final NationalParkLocation phoenixPark = new NationalParkLocation("Phoenix", 33.5, -112.1, "City");
 	
 	private static final double wacoLat = 31.6;
 	private static final double wacoLong = -97.2;
 	
 	@Test
 	public void wacoToNewYorkDistance() {
-		double distance = Ranking.distance(wacoLat, wacoLong, newYorkPark);
+		double distance = newYorkPark.distance(wacoLat, wacoLong);
 		assertTrue(distance > 1000.0);
 	}
 	
 	@Test
 	public void wacoToDallasDistance() {
-		double distance = Ranking.distance(wacoLat, wacoLong, dallasPark);
+		double distance = dallasPark.distance(wacoLat, wacoLong);
 		assertTrue(distance > 80.0);
 		assertTrue(distance < 90.0);
 	}
 	
 	@Test
 	public void rankingTest() {
-		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService() {
+		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService(), null, null, null {
 			@Override
 			public List<NationalParkLocation> getAllParkLocations() {
 				List<NationalParkLocation> result = new ArrayList<NationalParkLocation>();

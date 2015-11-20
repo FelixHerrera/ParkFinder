@@ -35,6 +35,7 @@
         <nav class="navbar navbar-default navbar-static-top navbar-home" role="navigation">
           <div class="container-fluid">
             <div class="navbar-header">
+
              <b><a class="navbar-brand" href="#">ParkFinder</a></b>
               </div>
               <div>
@@ -45,7 +46,7 @@
 			      </ul>
 			    </div>
 
-              </a>
+
             </div>
           </div>
         </nav>
@@ -55,7 +56,7 @@
             Do Something You'll Never Forget
           </div>
           <div class="promo-subhead">
-            Find Vacation Spots in Cities You'll Love
+            Find A Park Just For You
           </div>
         </div>
       </div>
@@ -68,7 +69,7 @@
             Start Here
           </h2>
           <p class="text-center housing-form-summary">
-            Let's find a destination that best matches you.
+            What kind of place are you looking to explore?
           </p>
           <form action="/search">
             <div class="form-group">
@@ -88,16 +89,28 @@
               <label>Terrain Type</label>
               <input id="toggleTerrainType" type="checkbox">
               <div id="terrainTypeContainer" hidden=true>
-                <input type="radio" name="terrainType" class="form-control" value="NoPreference" checked>No Preference
-                <input type="radio" name="terrainType" class="form-control">
-                <input type="radio" name="terrainType" class="form-control">
+                <input type="radio" name="terrainType" value="NoPreference" checked> No Preference
+                <br>
+                <input type="radio" name="terrainType" value="Historic Sites"> Historic Sites
+                <br>
+                <input type="radio" name="terrainType" value="Lakes, Rivers, and Seashores"> Lakes, Rivers, and Seashores
+                <br>
+                <input type="radio" name="terrainType" value="Outdoors (Mountains, Forests, Trails)"> Outdoors (Mountains, Forests, Trails)
+                <br>
+                <input type="radio" name="terrainType" value="Parkways, Reserves, and Recreation Areas"> Parkways, Reserves, and Recreation Areas
               </div>
             </div>
             <div class="form-group">
               <label>Size of Park</label>
-              <input id="toggleMaxDistance" type="checkbox">
-              <div id="maxDistanceContainer" hidden=true>
-                <input type="number" name="maxDistance" id="maxDistance" class="form-control" min="0" max="2000" step="5" value="0">
+              <input id="toggleParkSize" type="checkbox">
+              <div id="parkSizeContainer" hidden=true>
+                <input type="radio" name="parkSize" value="NoPreference" checked> No Preference
+                <br>
+                <input type="radio" name="parkSize" value="Small"> Small
+                <br>
+                <input type="radio" name="parkSize" value="Medium"> Medium
+                <br>
+                <input type="radio" name="parkSize" value="Large"> Large
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
