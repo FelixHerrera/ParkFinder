@@ -12,7 +12,8 @@ public class AlgorithmService {
 	NationalParkLocationService npls;
 	
 	public Ranking getRanking(double latitude, double longitude) {
-		return new Ranking(latitude, longitude, npls);
+		// TODO: Fix this method call
+		return new Ranking(latitude, longitude, npls, null, null, null);
 	}
 
 	public NationalParkLocationService getNpls() {

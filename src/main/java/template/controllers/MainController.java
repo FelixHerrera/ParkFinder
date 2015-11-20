@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 import template.algorithm.Ranking;
+import template.criteria.Criteria;
+import template.criteria.CriteriaFactory;
 import template.googlePlaceConsumer.json.GoogleLocation;
 import template.googlePlaceConsumer.json.GooglePlace;
 import template.managed.resources.AlloyResourceHttpRequestHandler;
@@ -68,7 +70,17 @@ public class MainController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(@RequestParam(required=true) String locationName, Model model){
+	public String search(@RequestParam(required=true) String locationName,
+			             @RequestParam(required=false) String maxDistance, 
+			             @RequestParam(required=false) String terrainType,
+						 @RequestParam(required=false) String parkSize, Model model){
+		
+		System.out.println("The following values can be found int \"search\"" +
+				" within the MainController, pulled from the client side.");
+		System.out.println(locationName);
+		System.out.println(maxDistance);
+		System.out.println(terrainType);
+		System.out.println(parkSize);
 		
 		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
@@ -78,8 +90,27 @@ public class MainController {
 		double latitude = gl.getLatitude();
 		double longitude = gl.getLongitude();
 		
+		CriteriaFactory CFactory = new CriteriaFactory();
+		Criteria terrainCriteria = null;
+		Criteria sizeCriteria = null;
+		Criteria distanceCriteria = null;
+		if (!terrainType.equals("NoPreference")) {
+			System.out.println("Creating terrain criteria");
+			terrainCriteria = CFactory.createCriteria("terrain", terrainType);
+		}
+		if (!parkSize.equals("NoPreference")) {
+			System.out.println("Creating size criteria");
+			sizeCriteria = CFactory.createCriteria("size", parkSize);
+		}
+		if (!maxDistance.equals("0")) {
+			System.out.println("Creating distance criteria");
+			maxDistance = maxDistance + "," + String.valueOf(latitude) + "," + String.valueOf(longitude);
+			distanceCriteria = CFactory.createCriteria("distance", maxDistance);
+		}
+		
 		model.addAttribute("gl", gl);
-		Ranking ranking = new Ranking(latitude, longitude, npls);
+		Ranking ranking = new Ranking(latitude, longitude, npls, terrainCriteria, distanceCriteria, 
+				sizeCriteria);
 		List<NationalParkLocation> rankedParks = ranking.getRanking();
 		
 		model.addAttribute("ranking", rankedParks);

@@ -32,20 +32,20 @@ public class RankingTest {
 	
 	@Test
 	public void wacoToNewYorkDistance() {
-		double distance = Ranking.distance(wacoLat, wacoLong, newYorkPark);
+		double distance = newYorkPark.distance(wacoLat, wacoLong);
 		assertTrue(distance > 1000.0);
 	}
 	
 	@Test
 	public void wacoToDallasDistance() {
-		double distance = Ranking.distance(wacoLat, wacoLong, dallasPark);
+		double distance = dallasPark.distance(wacoLat, wacoLong);
 		assertTrue(distance > 80.0);
 		assertTrue(distance < 90.0);
 	}
 	
 	@Test
 	public void rankingTest() {
-		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService() {
+		Ranking ranking = new Ranking(wacoLat, wacoLong, new NationalParkLocationService(), null, null, null {
 			@Override
 			public List<NationalParkLocation> getAllParkLocations() {
 				List<NationalParkLocation> result = new ArrayList<NationalParkLocation>();
