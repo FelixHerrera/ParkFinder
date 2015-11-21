@@ -42,36 +42,6 @@ public class Ranking {
 			ratingScore.put(npl, rating(npl));
 		}
 		
-		Collections.sort(parks, new Comparator<NationalParkLocation>() {
-
-			@Override
-			public int compare(NationalParkLocation npl1,
-					NationalParkLocation npl2) {
-					
-				Double distanceScore1 = distanceScore.get(npl1);
-				Double distanceScore2 = distanceScore.get(npl2);
-				Double ratingScore1 = ratingScore.get(npl1);
-				Double ratingScore2 = ratingScore.get(npl2);
-				
-				Double score1 = distanceScore1 * DISTANCE_WEIGHT + ratingScore1 * RATING_WEIGHT;
-				Double score2 = distanceScore2 * DISTANCE_WEIGHT + ratingScore2 * RATING_WEIGHT;
-				
-				if (score1 > score2){
-					return 1;
-				}
-				
-				else if (score1 == score2){
-					return 0;
-				}
-				
-				else{
-					return -1;
-				}
-				
-			}
-			
-		});
-		
 		// Filter by criteria
 		if (terrain != null) {
 			ArrayList<NationalParkLocation> toRemove = new ArrayList<NationalParkLocation>();
@@ -106,6 +76,54 @@ public class Ranking {
 		for (NationalParkLocation npl : parks) {
 			System.out.println(npl.toString() + " distance: " + npl.distance(latitude, longitude));
 		}
+		
+		if (size != null) {
+			ArrayList<NationalParkLocation> toRemove = new ArrayList<NationalParkLocation>();
+			System.out.println("Found size criteria");
+			for (NationalParkLocation npl: parks) {
+				if (size.fitCriteria(npl) == false) {
+					toRemove.add(npl);
+				}
+			}
+			System.out.println(toRemove.toString());
+			for(NationalParkLocation npl: toRemove) {
+				parks.remove(npl);
+			}
+		}
+		System.out.println("After size removal");
+		for (NationalParkLocation npl: parks) {
+			System.out.println(npl.toString());
+		}
+		
+		Collections.sort(parks, new Comparator<NationalParkLocation>() {
+
+			@Override
+			public int compare(NationalParkLocation npl1,
+					NationalParkLocation npl2) {
+					
+				Double distanceScore1 = distanceScore.get(npl1);
+				Double distanceScore2 = distanceScore.get(npl2);
+				Double ratingScore1 = ratingScore.get(npl1);
+				Double ratingScore2 = ratingScore.get(npl2);
+				
+				Double score1 = distanceScore1 * DISTANCE_WEIGHT + ratingScore1 * RATING_WEIGHT;
+				Double score2 = distanceScore2 * DISTANCE_WEIGHT + ratingScore2 * RATING_WEIGHT;
+				
+				if (score1 > score2){
+					return 1;
+				}
+				
+				else if (score1 == score2){
+					return 0;
+				}
+				
+				else{
+					return -1;
+				}
+				
+			}
+			
+		});
 		
 		return rank;
 	}

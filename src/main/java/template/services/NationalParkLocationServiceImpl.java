@@ -23,6 +23,12 @@ public class NationalParkLocationServiceImpl implements NationalParkLocationServ
 			public double longitude;
 		};
 		public ArrayList<ArrayList<BorderPoint>> points = new ArrayList<ArrayList<BorderPoint>>();
+		public double getBorderPointLat(int i, int j) {
+			return points.get(i).get(j).latitude;
+		}
+		public double getBorderPointLon(int i, int j) {
+			return points.get(i).get(j).longitude;
+		}
 		
 	};
 
@@ -66,6 +72,7 @@ public class NationalParkLocationServiceImpl implements NationalParkLocationServ
 		try(FileReader fr = new FileReader(fileName)) {
 			JSONTokener jsonT = new JSONTokener(fr);
 			JSONObject obj = new JSONObject(jsonT);
+			/*
 			JSONArray features = obj.optJSONArray("features");
 			for (int i=0; i < features.length(); i++) {
 				JSONObject jsonLocation = features.getJSONObject(i);
@@ -73,13 +80,18 @@ public class NationalParkLocationServiceImpl implements NationalParkLocationServ
 				if (!"Feature".equals(type)) {
 					continue;
 				}
-				JSONArray borders = jsonLocation.getJSONObject("geometry").getJSONArray("coordinates");
+			*/
+			JSONObject geo = obj.getJSONObject("geometry");
+			JSONArray borders = geo.getJSONArray("coordinates");
+				//JSONArray borders = jsonLocation.getJSONObject("geometry").getJSONArray("coordinates");
 				//
+			int i = 0;
 				for (int j=0; j < borders.length(); j++) {
 					result.points.add(new ArrayList<BorderPointLists.BorderPoint>());
 					JSONArray border = borders.getJSONArray(j);
 					for(int k=0; k < border.length(); k++) {
-						result.points.get(i).add(new BorderPointLists.BorderPoint());
+						BorderPointLists.BorderPoint aPoint = result.new BorderPoint();
+						result.points.get(i).add(aPoint);
 						BorderPointLists.BorderPoint p = result.points.get(i).get(j);
 						JSONArray point = border.getJSONArray(k);
 						p.longitude = point.getDouble(0);
@@ -87,7 +99,6 @@ public class NationalParkLocationServiceImpl implements NationalParkLocationServ
 					}
 				}
 				
-			}
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		} catch (JSONException e) {
