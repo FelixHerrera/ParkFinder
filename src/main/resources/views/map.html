@@ -24,6 +24,13 @@
           <a class="navbar-brand" href="/index.html">
             <img class="logo-svg" src="/images/plane.svg">
             <h3 class="logo-text">ParkFinder</h3>
+			<div>
+			      <ul class="nav navbar-nav">
+			        <li class="active"><a href="index.html">Home</a></li>
+			        <li><a href="map.html">About</a></li>
+			      </ul>
+			    </div>           
+            
           </a>
         </div>
       </div>
@@ -45,38 +52,44 @@
                 <label for="">
                   Maximum Distance From Location
                 </label>
-                <input type="number" name="maxDistance" id="" class="form-control" min="5" max="2000" step="5" value="20" >
+				<input id="toggleMaxDistance" type="checkbox">
+				<div id="maxDistanceContainer" hidden=true>
+                <input type="number" name="maxDistance" class="form-control" min="0" max="2000" step="5" value="0">
               </div>
-            <!--
-            <div class="form-group">
-              <label for="">Group Size</label>
-               <input type="text" class="form-control" placeholder="Group Size" />
             </div>
             <div class="form-group">
-              <label for="">Age Range</label>
-              <select name="" id="" class="form-control">
-                <option value="">20's</option>
-                <option value="">30's</option>
-                <option value="">40's</option>
-                <option value="">50's</option>
-                <option value="">60's</option>
-              </select>
+              <label>  Terrain Type</label>
+              <input id="toggleTerrainType" type="checkbox">
+              <div id="terrainTypeContainer" hidden=true>
+                <input type="radio" name="terrainType" value="NoPreference" checked>   No Preference
+                <br>
+                <input type="radio" name="terrainType" value="Historic Sites">   Historic Sites
+                <br>
+                <input type="radio" name="terrainType" value="Lakes, Rivers, and Seashores">   Lakes, Rivers, and Seashores
+                <br>
+                <input type="radio" name="terrainType" value="Outdoors (Mountains, Forests, Trails)">   Outdoors (Mountains, Forests, Trails)
+                <br>
+                <input type="radio" name="terrainType" value="Parkways, Reserves, and Recreation Areas">   Parkways, Reserves, and Recreation Areas
+              </div>
             </div>
             <div class="form-group">
-              <label for="">Vacation Type</label>
-              <select name="" id="" class="form-control">
-                <option value="">Beach</option>
-                <option value="">Low-key</option>
-                <option value="">Adventure</option>
-                <option value="">Sight Seeing</option>
-                <option value="">Kid Friendly</option>
-                <option value="">Resort</option>
-              </select>
-            </div>-->
-              <button type="submit" href="/map.html" class="btn btn-primary">Update</button>
-            </form>
-          </div>
+              <label>  Size of Park</label>
+              <input id="toggleParkSize" type="checkbox">
+              <div id="parkSizeContainer" hidden=true>
+                <input type="radio" name="parkSize" value="NoPreference" checked>   No Preference
+                <br>
+                <input type="radio" name="parkSize" value="Small">   Small
+                <br>
+                <input type="radio" name="parkSize" value="Medium">   Medium
+                <br>
+                <input type="radio" name="parkSize" value="Large">   Large
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
         </div>
+      </div>
+    </div>
         <div class="map"></div>
         <!-- <div th:each="location : ${ranking}">
           <p th:text="location">null location</p>
