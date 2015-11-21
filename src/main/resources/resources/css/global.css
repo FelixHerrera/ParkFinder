@@ -58,7 +58,7 @@ body {
 }
 
 .map-container {
-  background-image: url('/images/map.jpg');
+
   background-size: cover;
   border-radius: 5px;
   border: 1px solid lightgray;
@@ -71,11 +71,20 @@ body {
   padding: 0 20px;
 }
 
-.map-controls {
+.map-controls-left {
   left: 15px;
   position: absolute;
   top: 15px;
+  z-index: 3;
 }
+
+.map-controls-right {
+  right: 15px;
+  position: absolute;
+  top: 15px;
+  z-index: 3;
+}
+
 
 .promo-content {
   padding: 6em 2em 12em;
