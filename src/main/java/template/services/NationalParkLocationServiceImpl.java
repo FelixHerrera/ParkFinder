@@ -16,6 +16,15 @@ import template.models.NationalParkLocation;
 
 @Service
 public class NationalParkLocationServiceImpl implements NationalParkLocationService {
+	
+	public class BorderPointLists {
+		private class BorderPoint {
+			public double latitude;
+			public double longitude;
+		};
+		public ArrayList<ArrayList<BorderPoint>> points = new ArrayList<ArrayList<BorderPoint>>();
+		
+	};
 
 	public List<NationalParkLocation> getAllParkLocations(){
 		ArrayList<NationalParkLocation> result = new ArrayList();
@@ -37,7 +46,47 @@ public class NationalParkLocationServiceImpl implements NationalParkLocationServ
 				JSONObject properties = jsonLocation.getJSONObject("properties");
 				String name = properties.getString("UNIT_NAME");
 				String terrain = properties.getString("UNIT_TYPE");
-				result.add(new NationalParkLocation(name, lat, lon, terrain));
+				String code = properties.getString("UNIT_CODE");
+				NationalParkLocation npl = new NationalParkLocation(name, lat, lon, terrain, code);
+				npl.setBorders(getBorders(npl));
+				result.add(npl);
+			}
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		} catch (JSONException e) {
+			// TODO: log exception
+		}
+		return result;
+	}
+	
+	public BorderPointLists getBorders(NationalParkLocation npl) {
+		BorderPointLists result = new BorderPointLists();
+		String fileName = "src/main/resources/json/" + npl.getCode().toLowerCase() + ".geojson";
+		double lat,lon;
+		try(FileReader fr = new FileReader(fileName)) {
+			JSONTokener jsonT = new JSONTokener(fr);
+			JSONObject obj = new JSONObject(jsonT);
+			JSONArray features = obj.optJSONArray("features");
+			for (int i=0; i < features.length(); i++) {
+				JSONObject jsonLocation = features.getJSONObject(i);
+				String type = jsonLocation.getString("type");
+				if (!"Feature".equals(type)) {
+					continue;
+				}
+				JSONArray borders = jsonLocation.getJSONObject("geometry").getJSONArray("coordinates");
+				//
+				for (int j=0; j < borders.length(); j++) {
+					result.points.add(new ArrayList<BorderPointLists.BorderPoint>());
+					JSONArray border = borders.getJSONArray(j);
+					for(int k=0; k < border.length(); k++) {
+						result.points.get(i).add(new BorderPointLists.BorderPoint());
+						BorderPointLists.BorderPoint p = result.points.get(i).get(j);
+						JSONArray point = border.getJSONArray(k);
+						p.longitude = point.getDouble(0);
+						p.latitude = point.getDouble(1);	
+					}
+				}
+				
 			}
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {

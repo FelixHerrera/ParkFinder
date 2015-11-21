@@ -1,17 +1,30 @@
 package template.models;
 
+import template.services.NationalParkLocationServiceImpl;
+
 public class NationalParkLocation {
 	private String name;
 	private double longitude;
 	private double latitude;
 	private String terrain;
+	private String code;
+	private NationalParkLocationServiceImpl.BorderPointLists borders;
 	private final static double RADIUS_OF_EARTH = 3959.0;
 	
-	public NationalParkLocation(String name, double latitude, double longitude, String terrain) {
+	public NationalParkLocation(String name, double latitude, double longitude, String terrain, String code) {
 		this.name = name;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.terrain = terrain;
+		this.code = code;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getTerrain() {
@@ -44,6 +57,14 @@ public class NationalParkLocation {
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+	
+	public NationalParkLocationServiceImpl.BorderPointLists getBorders() {
+		return borders;
+	}
+
+	public void setBorders(NationalParkLocationServiceImpl.BorderPointLists borders) {
+		this.borders = borders;
 	}
 	
 	public String toString() {
