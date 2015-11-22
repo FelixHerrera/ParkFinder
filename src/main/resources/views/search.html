@@ -150,10 +150,41 @@ function initMap() {
 	console.log(locations);
 
 	var map = new google.maps.Map(document.getElementById('map'), {
-zoom: 10,
+	zoom: 4,
 center: new google.maps.LatLng(startLatitude, startLongitude),
 mapTypeId: google.maps.MapTypeId.ROADMAP
 });
+
+var maxLat = locations[0][1];
+	var minLat = locations[0][1];
+	var maxLon = locations[0][2];
+	var minLon = locations[0][2];
+	
+	for (i = 1; i < locations.length; i++) {  
+		if (maxLat < locations[i][1]) {
+			maxLat = locations[i][1];
+		}
+		if (minLat > locations[i][1]) {
+			minLat = locations[i][1];
+		}
+		// Because longitude in the continental US is negative
+		if (maxLon > locations[i][2]) {
+			maxLon = locations[i][2];
+		}
+		if (minLon < locations[i][2]) {
+			minLon = locations[i][2];
+		}
+	}
+
+var place1 = new google.maps.LatLng(minLat, minLon);
+var place2 = new google.maps.LatLng(maxLat, maxLon);
+
+var bounds = new google.maps.LatLngBounds();
+bounds.extend(place1);
+bounds.extend(place2);
+map.fitBounds(bounds);
+
+
 
 var width = 280;
 var height = 264;
@@ -178,11 +209,41 @@ var infowindow = new google.maps.InfoWindow();
 
 var marker, i;
 
-for (i = 0; i < locations.length; i++) {  
-	marker = new google.maps.Marker({
-	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-	map: map
-});
+var firstPlace = "/images/GoldArrowhead.png";
+var secondPlace = "/images/SilverArrowhead.png";
+var thirdPlace = "/images/BronzeArrowhead.png";
+
+for (i = 0; i < locations.length; i++) { 
+	if (i == 0){
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+			icon: firstPlace
+		});
+		console.log("First "+ i);
+	}
+	else if (i == 1){
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+			icon: secondPlace
+		});
+	}
+	else if (i == 2){
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+			icon: thirdPlace
+		});
+	}
+	else{
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map
+		});
+		console.log("else "+ i);
+	}
+
 
 google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
