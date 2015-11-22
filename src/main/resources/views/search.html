@@ -103,9 +103,9 @@
 			<div class="panel-body">
 				<form>
 					<div class="form-group">
-						<div id = "location_div" th:each="location: ${ranking}">
-							<p th:text= "${location.getName()}"></p>
+						<div id = "location_div" th:each="location: ${ranking}">	
 						</div>
+						<div id = "ranking"></div>
 					</div>
 				</form>
 
@@ -114,7 +114,7 @@
 		<div id="map"></div>
 	</div>  
 </div>
-
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script th:inline = "javascript">
 /*<![CDATA[*/
 var ranking = /*[[${ranking}]]*/ ;
@@ -122,7 +122,10 @@ var startLocation = /*[[${gl}]]*/ ;
 /*]]>*/
 console.log(ranking);
 
+ 
+
 function initMap() {
+	var svgLocations = [];
 	var locations = [];
 	var parkInfo = [];
 	var i = 0;
@@ -137,15 +140,14 @@ function initMap() {
 		parkInfo.push(ranking[j].longitude);
 		parkInfo.push(i);
 		locations.push(parkInfo);
+		svgLocations.push({
+			name: ranking[j].name,
+			rank: i,
+			x: 23,
+			y: i*20
+		});
 	}	
 	console.log(locations);
-	// var locations = [
-	//  ['Bondi Beach', -33.890542, 151.274856, 4],
-	//['Coogee Beach', -33.923036, 151.259052, 5],
-	//['Cronulla Beach', -34.028249, 151.157507, 3],
-	//['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-	//['Maroubra Beach', -33.950198, 151.259302, 1]
-	//];
 
 	var map = new google.maps.Map(document.getElementById('map'), {
 zoom: 10,
@@ -153,25 +155,51 @@ center: new google.maps.LatLng(startLatitude, startLongitude),
 mapTypeId: google.maps.MapTypeId.ROADMAP
 });
 
+var width = 280;
+var height = 264;
+ var svgContainer = d3.select("#ranking").append("svg")
+	.attr("width", width)
+	.attr("height", height);
+var text = svgContainer.selectAll("text")
+	.data(svgLocations)
+	.enter();
+text.append("text")
+	.text(function(d){return d.name;})
+	.attr("x", function (d) {return d.x;})
+	.attr("y", function (d) {return d.y;})
+	.attr("font-size", "12px");
+text.append("text")
+	.text(function(d){return d.rank + ") ";})
+	.attr("x", function (d) {return 0;})
+	.attr("y", function (d) {return d.y;})
+	.attr("font-size", "14px");
+
 var infowindow = new google.maps.InfoWindow();
 
 var marker, i;
 
 for (i = 0; i < locations.length; i++) {  
 	marker = new google.maps.Marker({
-position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-map: map
+	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	map: map
 });
 
 google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
 			infowindow.setContent(locations[i][0]);
 			infowindow.open(map, marker);
+			svgContainer.selectAll("text")
+				.attr("border", 3)
+				.attr("stroke","black");
 			}
 			})(marker, i));
 }
+
+
 }
 
+
+	
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5eYzsn2LHNmUASOhcvqVg6wzgn4KO4BI &callback=initMap">
