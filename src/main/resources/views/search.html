@@ -180,11 +180,41 @@ var infowindow = new google.maps.InfoWindow();
 
 var marker, i;
 
-for (i = 0; i < locations.length; i++) {  
-	marker = new google.maps.Marker({
-position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-map: map
-});
+var firstPlace = "/images/GoldArrowhead.png";
+var secondPlace = "/images/SilverArrowhead.png";
+var thirdPlace = "/images/BronzeArrowhead.png";
+
+for (i = 0; i < locations.length; i++) { 
+	if (i == 0){
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+			icon: firstPlace
+		});
+		console.log("First "+ i);
+	}
+	else if (i == 1){
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+			icon: secondPlace
+		});
+	}
+	else if (i == 2){
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+			icon: thirdPlace
+		});
+	}
+	else{
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map
+		});
+		console.log("else "+ i);
+	}
+
 
 google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
