@@ -103,9 +103,9 @@
 			<div class="panel-body">
 				<form>
 					<div class="form-group">
-						<div id = "location_div" th:each="location: ${ranking}">
-							<p th:text= "${location.getName()}"></p>
+						<div id = "location_div" th:each="location: ${ranking}">	
 						</div>
+						<div id = "ranking"></div>
 					</div>
 				</form>
 
@@ -114,7 +114,7 @@
 		<div id="map"></div>
 	</div>  
 </div>
-
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script th:inline = "javascript">
 /*<![CDATA[*/
 var ranking = /*[[${ranking}]]*/ ;
@@ -122,7 +122,10 @@ var startLocation = /*[[${gl}]]*/ ;
 /*]]>*/
 console.log(ranking);
 
+ 
+
 function initMap() {
+	var svgLocations = [];
 	var locations = [];
 	var parkInfo = [];
 	var i = 0;
@@ -137,16 +140,22 @@ function initMap() {
 		parkInfo.push(ranking[j].longitude);
 		parkInfo.push(i);
 		locations.push(parkInfo);
+		svgLocations.push({
+			name: ranking[j].name,
+			rank: i,
+			x: 23,
+			y: i*20
+		});
 	}	
 	console.log(locations);
-	
+
 	var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 4,
 center: new google.maps.LatLng(startLatitude, startLongitude),
 mapTypeId: google.maps.MapTypeId.ROADMAP
 });
 
-	var maxLat = locations[0][1];
+var maxLat = locations[0][1];
 	var minLat = locations[0][1];
 	var maxLon = locations[0][2];
 	var minLon = locations[0][2];
@@ -175,6 +184,26 @@ bounds.extend(place1);
 bounds.extend(place2);
 map.fitBounds(bounds);
 
+
+
+var width = 280;
+var height = 264;
+ var svgContainer = d3.select("#ranking").append("svg")
+	.attr("width", width)
+	.attr("height", height);
+var text = svgContainer.selectAll("text")
+	.data(svgLocations)
+	.enter();
+text.append("text")
+	.text(function(d){return d.name;})
+	.attr("x", function (d) {return d.x;})
+	.attr("y", function (d) {return d.y;})
+	.attr("font-size", "12px");
+text.append("text")
+	.text(function(d){return d.rank + ") ";})
+	.attr("x", function (d) {return 0;})
+	.attr("y", function (d) {return d.y;})
+	.attr("font-size", "14px");
 
 var infowindow = new google.maps.InfoWindow();
 
@@ -220,11 +249,18 @@ google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
 			infowindow.setContent(locations[i][0]);
 			infowindow.open(map, marker);
+			svgContainer.selectAll("text")
+				.attr("border", 3)
+				.attr("stroke","black");
 			}
 			})(marker, i));
 }
+
+
 }
 
+
+	
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5eYzsn2LHNmUASOhcvqVg6wzgn4KO4BI &callback=initMap">
