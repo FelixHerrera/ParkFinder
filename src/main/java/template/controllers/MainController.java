@@ -133,4 +133,9 @@ public class MainController {
 	public String locations(Model model){
 		return "locations";
 	}
+	
+	@RequestMapping("/about")
+	public String about(Model model){
+		return "about";
+	}
 }
