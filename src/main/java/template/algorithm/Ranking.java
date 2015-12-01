@@ -45,9 +45,9 @@ public class Ranking {
 		// Filter by criteria
 		ArrayList<NationalParkLocation> newParks = new ArrayList<NationalParkLocation>();
 		for (NationalParkLocation npl : parks) {
-			if (terrain != null && terrain.fitCriteria(npl) &&
-				distance != null && distance.fitCriteria(npl) &&
-				size != null && size.fitCriteria(npl)) {
+			if ((terrain == null || terrain.fitCriteria(npl)) &&
+				(distance == null || distance.fitCriteria(npl)) &&
+				(size == null || size.fitCriteria(npl))) {
 				newParks.add(npl);
 			}
 		}
