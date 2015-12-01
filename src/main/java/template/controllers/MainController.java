@@ -82,7 +82,7 @@ public class MainController {
 		}
 		
 		model.addAttribute("gl", gl);
-		Ranking ranking = new Ranking(latitude, longitude, npls, terrainCriteria, distanceCriteria, 
+		Ranking ranking = new Ranking(latitude, longitude, npls, gps, terrainCriteria, distanceCriteria, 
 				sizeCriteria);
 		List<NationalParkLocation> rankedParks = ranking.getRanking();
 		

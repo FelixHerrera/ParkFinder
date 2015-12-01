@@ -6,20 +6,28 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import template.criteria.Criteria;
+import template.googlePlaceConsumer.json.GooglePlace;
 import template.models.NationalParkLocation;
+import template.services.GooglePlacesService;
 import template.services.NationalParkLocationService;
 import template.services.NationalParkLocationServiceImpl;
 
 public class Ranking {
+	
+	private GooglePlacesService gps;
 	
 	private final static double DISTANCE_WEIGHT = 0.7;
 	private final static double RATING_WEIGHT = 0.3;
 	
 	private List<NationalParkLocation> parks;
 	
-	public Ranking(double latitude, double longitude, NationalParkLocationService npls, 
+	public Ranking(double latitude, double longitude, NationalParkLocationService npls, GooglePlacesService gps, 
 			Criteria terrain, Criteria distance, Criteria size) {
+		this.gps = gps;
 		parks = npls.getAllParkLocations();
 		rank(latitude, longitude, terrain, distance, size);
 	}
@@ -87,11 +95,10 @@ public class Ranking {
 	}
 	
 	private double rating(NationalParkLocation npl){
-		//GooglePlacesDBService gps = new GooglePlacesDBService(npl.getName());
-		//GooglePlace pgp = gps.getPlaceDetails();
-//		String placeId = pgp.getRating();
-		//return pgp.getRating();
-		return 0;
+		GooglePlace pgp = gps.getPlaceDetails(npl.getName());
+		//double placeId = pgp.getRating();
+		return pgp.getRating();
+		//return 0;
 	}
 
 	public String toString(){

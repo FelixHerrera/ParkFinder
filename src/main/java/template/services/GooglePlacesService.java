@@ -15,8 +15,8 @@ import template.googlePlaceConsumer.json.GooglePlaces;
 public class GooglePlacesService {
 	private static final String URL = "https://maps.googleapis.com/maps/api/place/textsearch/json?key={KEY}&query={location}";
 	
-//	private static final String FELIX_KEY = "AIzaSyBxSJwn_0wag2TcejfFLG64oVHTtkuALCo";
-	private static final String JONATHAN_KEY = "AIzaSyBIoKRR5QF4akp1qcGxfJwYTdhy8RTq_Tw";
+	private static final String FELIX_KEY = "AIzaSyBxSJwn_0wag2TcejfFLG64oVHTtkuALCo";
+//	private static final String JONATHAN_KEY = "AIzaSyBIoKRR5QF4akp1qcGxfJwYTdhy8RTq_Tw";
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -26,9 +26,10 @@ public class GooglePlacesService {
 		Cache c = cm.getCache("getPlaceDetails");
 		Element element = c.get(locationName);
 		System.out.println(element);
+		System.out.println(locationName);
 		if (element == null) {
 			GooglePlaces gps = restTemplate.getForObject(URL,
-					  GooglePlaces.class, JONATHAN_KEY, locationName);
+					  GooglePlaces.class, FELIX_KEY, locationName);
 			GooglePlace gp = gps.getGooglePlaces().get(0);
 			c.put(new Element(locationName, gp));
 			c.flush();
