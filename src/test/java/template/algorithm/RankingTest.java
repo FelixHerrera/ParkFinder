@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import template.googlePlaceConsumer.json.GooglePlace;
 import template.main.CustomEmbeddedWebApplicationContext;
 import template.models.NationalParkLocation;
 import template.services.AlgorithmService;
+import template.services.GooglePlacesService;
 import template.services.NationalParkLocationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,6 +24,9 @@ public class RankingTest {
 
 	@Autowired
 	AlgorithmService as;
+	
+	@Autowired
+	GooglePlacesService gps;
 	
 	private static final NationalParkLocation newYorkPark = new NationalParkLocation("New York", 40.7, -74.0, "City", "New York");
 	private static final NationalParkLocation dallasPark = new NationalParkLocation("Dallas", 32.8, -96.8, "City", "Dallas");
@@ -54,7 +59,7 @@ public class RankingTest {
 				result.add(phoenixPark);
 				return result;
 			}
-		}, null, null, null);
+		}, gps, null, null, null);
 		List<NationalParkLocation> rankingList = ranking.getRanking();
 		assertEquals(dallasPark, rankingList.get(0));
 		assertEquals(phoenixPark, rankingList.get(1));
