@@ -17,6 +17,7 @@ public class GooglePlacesService {
 	
 	private static final String FELIX_KEY = "AIzaSyBxSJwn_0wag2TcejfFLG64oVHTtkuALCo";
 //	private static final String JONATHAN_KEY = "AIzaSyBIoKRR5QF4akp1qcGxfJwYTdhy8RTq_Tw";
+	//private static final String FELIX_KEY = "AIzaSyA5eYzsn2LHNmUASOhcvqVg6wzgn4KO4BI";
 
 	@Autowired
 	private RestTemplate restTemplate;
