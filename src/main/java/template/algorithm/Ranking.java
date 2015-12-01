@@ -43,40 +43,15 @@ public class Ranking {
 		}
 		
 		// Filter by criteria
-		if (terrain != null) {
-			ArrayList<NationalParkLocation> toRemove = new ArrayList<NationalParkLocation>();
-			for (NationalParkLocation npl : parks) {
-				if (terrain.fitCriteria(npl) == false) {
-					toRemove.add(npl);
-				}
-			}
-			for (NationalParkLocation npl : toRemove) {
-				parks.remove(npl);
+		ArrayList<NationalParkLocation> newParks = new ArrayList<NationalParkLocation>();
+		for (NationalParkLocation npl : parks) {
+			if (terrain != null && terrain.fitCriteria(npl) &&
+				distance != null && distance.fitCriteria(npl) &&
+				size != null && size.fitCriteria(npl)) {
+				newParks.add(npl);
 			}
 		}
-		if (distance != null) {
-			ArrayList<NationalParkLocation> toRemove = new ArrayList<NationalParkLocation>();
-			for (NationalParkLocation npl: parks) {
-				if (distance.fitCriteria(npl) == false) {
-					toRemove.add(npl);
-				}
-			}
-			for (NationalParkLocation npl : toRemove) {
-				parks.remove(npl);
-			}
-		}
-		
-		if (size != null) {
-			ArrayList<NationalParkLocation> toRemove = new ArrayList<NationalParkLocation>();
-			for (NationalParkLocation npl: parks) {
-				if (size.fitCriteria(npl) == false) {
-					toRemove.add(npl);
-				}
-			}
-			for(NationalParkLocation npl: toRemove) {
-				parks.remove(npl);
-			}
-		}
+		parks = newParks;
 		
 		Collections.sort(parks, new Comparator<NationalParkLocation>() {
 
