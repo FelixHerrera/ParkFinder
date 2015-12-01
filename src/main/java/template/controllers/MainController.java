@@ -111,4 +111,9 @@ public class MainController {
 	public String about(Model model){
 		return "about";
 	}
+	
+	@RequestMapping("/traveltips")
+	public String traveltips(Model model) {
+		return "traveltips";
+	}
 }
