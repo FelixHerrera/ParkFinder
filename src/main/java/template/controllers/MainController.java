@@ -41,46 +41,19 @@ public class MainController {
 
 		return "index";
 	}
-	
-	@RequestMapping("/map")
-	public String map(@RequestParam(required=false) String locationName,
-	                  @RequestParam(required=false) String maxDistance, Model model) {
 
-	    model.addAttribute("locationName", locationName);
-	    model.addAttribute("maxDistance", maxDistance);
-	    
-		double latitude;
-		double longitude;
-		
-		GooglePlace gp = gps.getPlaceDetails(locationName);
-		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
-		
-		logger.debug(gl);
-		
-		latitude = gl.getLatitude();
-		longitude = gl.getLongitude();
-		
-		model.addAttribute("latitude", latitude);
-		model.addAttribute("longitude", longitude);
-		Ranking ranking = as.getRanking(latitude, longitude);
-		
-		model.addAttribute("ranking", ranking);
-	    
-		return "map";
-	}
-	
 	@RequestMapping("/search")
 	public String search(@RequestParam(required=true) String locationName,
 			             @RequestParam(required=false) String maxDistance, 
 			             @RequestParam(required=false) String terrainType,
 						 @RequestParam(required=false) String parkSize, Model model){
 		
-		System.out.println("The following values can be found int \"search\"" +
+		logger.debug("The following values can be found int \"search\"" +
 				" within the MainController, pulled from the client side.");
-		System.out.println(locationName);
-		System.out.println(maxDistance);
-		System.out.println(terrainType);
-		System.out.println(parkSize);
+		logger.debug(locationName);
+		logger.debug(maxDistance);
+		logger.debug(terrainType);
+		logger.debug(parkSize);
 		
 		GooglePlace gp = gps.getPlaceDetails(locationName);
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();

@@ -21,7 +21,6 @@ public class GooglePlacesService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Cacheable(value = "getPlaceDetails")
 	public GooglePlace getPlaceDetails(String locationName) {
 		CacheManager cm = CacheManager.create();
 		Cache c = cm.getCache("getPlaceDetails");

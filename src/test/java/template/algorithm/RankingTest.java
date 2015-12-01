@@ -23,9 +23,9 @@ public class RankingTest {
 	@Autowired
 	AlgorithmService as;
 	
-	private static final NationalParkLocation newYorkPark = new NationalParkLocation("New York", 40.7, -74.0, "City");
-	private static final NationalParkLocation dallasPark = new NationalParkLocation("Dallas", 32.8, -96.8, "City");
-	private static final NationalParkLocation phoenixPark = new NationalParkLocation("Phoenix", 33.5, -112.1, "City");
+	private static final NationalParkLocation newYorkPark = new NationalParkLocation("New York", 40.7, -74.0, "City", "New York");
+	private static final NationalParkLocation dallasPark = new NationalParkLocation("Dallas", 32.8, -96.8, "City", "Dallas");
+	private static final NationalParkLocation phoenixPark = new NationalParkLocation("Phoenix", 33.5, -112.1, "City", "Phoenix");
 	
 	private static final double wacoLat = 31.6;
 	private static final double wacoLong = -97.2;
