@@ -21,11 +21,11 @@ public class GooglePlacesService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Cacheable(value = "getPlaceDetails")
 	public GooglePlace getPlaceDetails(String locationName) {
 		CacheManager cm = CacheManager.create();
 		Cache c = cm.getCache("getPlaceDetails");
 		Element element = c.get(locationName);
+		System.out.println(element);
 		if (element == null) {
 			GooglePlaces gps = restTemplate.getForObject(URL,
 					  GooglePlaces.class, JONATHAN_KEY, locationName);
