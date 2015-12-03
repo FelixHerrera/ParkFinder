@@ -122,8 +122,14 @@ function initMap() {
 	var locations = [];
 	var parkInfo = [];
 	var i = 0;
-	var startLatitude = startLocation.latitude;
-	var startLongitude = startLocation.longitude;
+	if(startLocation != null){
+		var startLatitude = startLocation.latitude;
+		var startLongitude = startLocation.longitude;
+	}
+	else{
+		var startLatitude = 0;
+		var startLongitude = 0;
+	}
 
 	for (var j = 0; j < ranking.length && j < 10; j++){
 		parkInfo = [];
@@ -141,6 +147,15 @@ function initMap() {
 		});
 	}	
 	console.log(locations);
+	
+	if (svgLocations.length == 0) {
+		svgLocations.push({
+			name: "No results -  please try again",
+			rank: 1,
+			x: 23,
+			y: 20
+		});
+	}
 
 	var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 4,

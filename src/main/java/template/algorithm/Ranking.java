@@ -93,9 +93,10 @@ public class Ranking implements Iterable<NationalParkLocation> {
 	
 	private double rating(NationalParkLocation npl){
 		GooglePlace pgp = gps.getPlaceDetails(npl.getName());
-		//double placeId = pgp.getRating();
+		if (pgp == null){
+			return 0;
+		}
 		return pgp.getRating();
-		//return 0;
 	}
 
 	public String toString(){
