@@ -8,6 +8,7 @@ public class NationalParkLocation {
 	private double latitude;
 	private String terrain;
 	private String code;
+	private double distance;
 	private NationalParkLocationServiceImpl.BorderPointLists borders;
 	private final static double RADIUS_OF_EARTH = 3959.0;
 	
@@ -17,6 +18,7 @@ public class NationalParkLocation {
 		this.latitude = latitude;
 		this.terrain = terrain;
 		this.code = code;
+		this.distance = 0;
 	}
 
 	public String getCode() {
@@ -67,6 +69,13 @@ public class NationalParkLocation {
 		this.borders = borders;
 	}
 	
+	public void setDistance(double distance){
+		this.distance = distance;
+	}
+	public double getDistance(){
+		return distance;
+	}
+	
 	public String toString() {
 		return this.name + ":(" + this.latitude + ", " + this.longitude + ")" + " terrain: " + this.terrain;
 	}
@@ -99,7 +108,7 @@ public class NationalParkLocation {
 //		double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 //		distance = 3961.0 * c;
 //		distance = Math.sqrt(dlat+dlong);
-		
+		this.distance = distance;
 		return distance;
 	}
 

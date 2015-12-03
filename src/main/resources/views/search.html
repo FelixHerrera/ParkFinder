@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
 #map { 
-	height: 95%;
-	width:95%;
+	height: 100%;
+	width:100%;
 	border-radius: 5px;
 	border: 1px solid lightgray;
 	position: relative;
@@ -26,68 +26,74 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-<nav class="navbar navbar-default navbar-static-top navbar-map" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">
-				<img class="logo-svg" src="/images/ArrowheadLogo.png">
-				<h3 class="logo-text">ParkFinder</h3>        
-			</a>
-		</div>
-	</div>
-</nav>
+<div class="navbar header">
+<a class="navbar-brand" href="/" ParkFinder>
+<img alt="logo-svg" src="/images/ArrowheadLogo.png" style= "height: 2em;z-index: 100; position:relative; top:7px">
+<h3 class="logo-text" style= "color: white; display: inline; margin-left: .5em;z-index: 100; position:absolute; top:10px; left:37px">ParkFinder</h3>
+</a>
+       <nav class="navbar navbar-default navbar-map" role="navigation">
+         <div class="container-fluid">
+           <div class="navbar-header">
+            <b></b>
+             </div>
+             <div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="traveltips">Travel Tips</a></li>
+    </ul>
+  </div>
+           </div>
+       </nav>
+     </div>
 
 <div class="map-outer-container">
 	<div class="map-container">
 		<div class="panel panel-primary map-controls-left">
 			<div class="panel-heading">Park Criteria</div>
 			<div class="panel-body">
-				<form>
-					<div class="form-group">
-						<label for="">
-							Location
-						</label>
-						<input type="text" name="locationName" class="form-control" placeholder="Country, City..." />
-					</div>
-					<div class="form-group">
-						<label for="">
-							Maximum Distance From Location
-						</label>
-						<input id="toggleMaxDistance" type="checkbox">
-						<div id="maxDistanceContainer" hidden=true>
-							<input type="number" name="maxDistance" class="form-control" min="0" max="2000" step="5" value="0">
-						</div>
-					</div>
-					<div class="form-group">
-						<label>  Terrain Type</label>
-						<input id="toggleTerrainType" type="checkbox">
-						<div id="terrainTypeContainer" hidden=true>
-							<input type="radio" name="terrainType" value="NoPreference" checked>   No Preference
-							<br>
-							<input type="radio" name="terrainType" value="Historic Sites">   Historic Sites
-							<br>
-							<input type="radio" name="terrainType" value="Lakes, Rivers, and Seashores">   Lakes, Rivers, and Seashores
-							<br>
-							<input type="radio" name="terrainType" value="Outdoors (Mountains, Forests, Trails)">   Outdoors (Mountains, Forests, Trails)
-							<br>
-							<input type="radio" name="terrainType" value="Parkways, Reserves, and Recreation Areas">   Parkways, Reserves, and Recreation Areas
-						</div>
-					</div>
-					<div class="form-group">
-						<label>  Size of Park</label>
-						<input id="toggleParkSize" type="checkbox">
-						<div id="parkSizeContainer" hidden=true>
-							<input type="radio" name="parkSize" value="NoPreference" checked>   No Preference
-							<br>
-							<input type="radio" name="parkSize" value="Small">   Small
-							<br>
-							<input type="radio" name="parkSize" value="Medium">   Medium
-							<br>
-							<input type="radio" name="parkSize" value="Large">   Large
-						</div>
-					</div>
-					<button type="submit" class="btn btn-primary">Search</button>
-				</form>
+				<form action="/search">
+<div class="form-group">
+            <label for="">
+              Location
+            </label>
+            <input type="text" name="locationName" class="form-control" placeholder="Country, City..." />
+            </div>
+            <div class="form-group">
+              <label>Maximum Distance From Location</label>
+              <div id="maxDistanceContainer">
+                <input type="number" name="maxDistance" class="form-control" min="0" max="2000" step="5" value="0" placeholder="No Preference">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Terrain Type</label>
+              <div id="terrainTypeContainer">
+                <input type="radio" name="terrainType" value="NoPreference" checked> No Preference
+                <br>
+                <input type="radio" name="terrainType" value="Historic Sites"> Historic Sites
+                <br>
+                <input type="radio" name="terrainType" value="Lakes, Rivers, and Seashores"> Lakes, Rivers, and Seashores
+                <br>
+                <input type="radio" name="terrainType" value="Outdoors (Mountains, Forests, Trails)"> Outdoors (Mountains, Forests, Trails)
+                <br>
+                <input type="radio" name="terrainType" value="Parkways, Reserves, and Recreation Areas"> Parkways, Reserves, and Recreation Areas
+                <br>
+            </div>
+           </div>
+            <div class="form-group">
+              <label>Size of Park</label>
+              <div id="parkSizeContainer">
+               <input type="radio" name="parkSize" value="NoPreference" checked> No Preference
+               <br>
+                <input type="radio" name="parkSize" value="Small"> Small
+                <br>
+                <input type="radio" name="parkSize" value="Medium"> Medium
+                <br>
+                <input type="radio" name="parkSize" value="Large"> Large
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
 			</div>
 		</div>
 
@@ -139,12 +145,15 @@ function initMap() {
 		parkInfo.push(ranking[j].longitude);
 		parkInfo.push(ranking[j].distance);
 		parkInfo.push(i);
+		parkInfo.push(ranking[j].code);
 		locations.push(parkInfo);
 		svgLocations.push({
 			name: ranking[j].name,
 			rank: i,
+			distance: ranking[j].distance,
 			x: 23,
-			y: i*20
+			y: i*40,
+			id: i
 		});
 	}	
 	console.log(locations);
@@ -216,7 +225,6 @@ text.append("text")
 .attr("x", function (d) {return 10;})
 .attr("y", function (d) {return d.y;})
 .attr("font-size", "12px")
-.attr("font-weight", "bold");
 text.append("text")
 .text(function(d){return d.rank + ") ";})
 .attr("x", function (d) {return 0;})
@@ -227,11 +235,18 @@ var infowindow = new google.maps.InfoWindow();
 
 var marker, i;
 
-var firstPlace = "/images/GoldArrowhead.png";
-var secondPlace = "/images/SilverArrowhead.png";
-var thirdPlace = "/images/BronzeArrowhead.png";
+var firstPlace = "/images/GoldArrowhead3.png";
+var secondPlace = "/images/SilverArrowhead2.png";
+var thirdPlace = "/images/BronzeArrowhead2.png";
+var originPlace = "/images/You-Are-Here-Star.png";
+var originMarker = new google.maps.Marker({
+    position: new google.maps.LatLng(startLatitude, startLongitude),
+    map: map,
+    icon: originPlace
+});
 
 for (i = 0; i < locations.length; i++) { 
+	var image = "/images/Arrowhead"+(i+1)+".png"
 	if (i == 0){
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
@@ -257,7 +272,8 @@ for (i = 0; i < locations.length; i++) {
 	else{
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-			map: map
+			map: map,
+			icon: image
 		});
 		console.log("else "+ i);
 	}
@@ -265,11 +281,8 @@ for (i = 0; i < locations.length; i++) {
 
 google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
-			infowindow.setContent(locations[i][0]);
+			infowindow.setContent(locations[i][0].link("http://www.nps.gov/"+locations[i][5]));
 			infowindow.open(map, marker);
-			svgContainer.selectAll("text")
-				.attr("border", 3)
-				.attr("stroke","black");
 			}
 			})(marker, i));
 }
@@ -284,14 +297,6 @@ google.maps.event.addListener(marker, 'click', (function(marker, i) {
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5eYzsn2LHNmUASOhcvqVg6wzgn4KO4BI &callback=initMap">
 </script>
 
-
-
-
-<div class="footer">
-	<div class="container-fluid">
-		Built with love from the Credera team and Clarissa and Kristen
-	</div>
-</div>	
 
 
 <!-- build:js scripts/main.js -->
