@@ -43,10 +43,6 @@ public class Ranking implements Iterable<NationalParkLocation> {
 			distanceScore.put(npl, npl.distance(latitude, longitude));
 		}
 		
-		for(NationalParkLocation npl: parks){
-			ratingScore.put(npl, rating(npl));
-		}
-		
 		// Filter by criteria
 		ArrayList<NationalParkLocation> newParks = new ArrayList<NationalParkLocation>();
 		for (NationalParkLocation npl : parks) {
@@ -66,21 +62,44 @@ public class Ranking implements Iterable<NationalParkLocation> {
 					
 				Double distanceScore1 = distanceScore.get(npl1);
 				Double distanceScore2 = distanceScore.get(npl2);
-				Double ratingScore1 = ratingScore.get(npl1);
-				Double ratingScore2 = ratingScore.get(npl2);
+				
+				Double score1 = distanceScore1;
+				Double score2 = distanceScore2;
+				
+				if (score1 > score2){
+					return 1;
+				} else if (score1 == score2){
+					return 0;
+				} else{
+					return -1;
+				}
+				
+			}
+			
+		});
+		try {
+			parks = parks.subList(0, 10);
+		} catch (IndexOutOfBoundsException e) {}
+		
+		Collections.sort(parks, new Comparator<NationalParkLocation>() {
+
+			@Override
+			public int compare(NationalParkLocation npl1,
+					NationalParkLocation npl2) {
+					
+				Double distanceScore1 = distanceScore.get(npl1);
+				Double distanceScore2 = distanceScore.get(npl2);
+				Double ratingScore1 = rating(npl1);
+				Double ratingScore2 = rating(npl2);
 				
 				Double score1 = distanceScore1 * DISTANCE_WEIGHT + ratingScore1 * RATING_WEIGHT;
 				Double score2 = distanceScore2 * DISTANCE_WEIGHT + ratingScore2 * RATING_WEIGHT;
 				
 				if (score1 > score2){
 					return 1;
-				}
-				
-				else if (score1 == score2){
+				} else if (score1 == score2){
 					return 0;
-				}
-				
-				else{
+				} else{
 					return -1;
 				}
 				

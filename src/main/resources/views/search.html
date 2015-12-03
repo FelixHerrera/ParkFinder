@@ -172,6 +172,24 @@ mapTypeId: google.maps.MapTypeId.ROADMAP
 			x: 23,
 			y: 20
 		});
+var width = 280;
+var height = 264;
+ var svgContainer = d3.select("#ranking").append("svg")
+	.attr("width", width)
+	.attr("height", height);
+var text = svgContainer.selectAll("text")
+	.data(svgLocations)
+	.enter();
+text.append("text")
+	.text(function(d){return d.name;})
+	.attr("x", function (d) {return d.x;})
+	.attr("y", function (d) {return d.y;})
+	.attr("font-size", "12px");
+text.append("text")
+	.text(function(d){return d.rank + ") ";})
+	.attr("x", function (d) {return 0;})
+	.attr("y", function (d) {return d.y;})
+	.attr("font-size", "14px");
 		return;
 	}
 	
