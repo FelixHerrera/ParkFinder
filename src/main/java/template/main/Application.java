@@ -24,9 +24,9 @@ public class Application {
 		CacheManager cm = CacheManager.create(new Configuration().diskStore(new DiskStoreConfiguration().path(path)));
 		
 		Cache getPlaceDetailsCache = new Cache(
-				new CacheConfiguration("getPlaceDetails", 1000) // Create a new cache that can contain 1000 objects 
+				new CacheConfiguration("getPlaceDetails", 100000) // Create a new cache that can contain 1000 objects 
 				    .memoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.LFU) 
-				    .eternal(false)  
+				    .eternal(true)  
 				    .diskExpiryThreadIntervalSeconds(2629743)
 				    .diskPersistent(true));
 		cm.addCache(getPlaceDetailsCache);

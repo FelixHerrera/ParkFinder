@@ -66,6 +66,33 @@ public class Ranking implements Iterable<NationalParkLocation> {
 					
 				Double distanceScore1 = distanceScore.get(npl1);
 				Double distanceScore2 = distanceScore.get(npl2);
+				
+				Double score1 = distanceScore1;
+				Double score2 = distanceScore2;
+				
+				if (score1 > score2){
+					return 1;
+				} else if (score1 == score2){
+					return 0;
+				} else{
+					return -1;
+				}
+				
+			}
+			
+		});
+		try {
+			parks = parks.subList(0, 10);
+		} catch (IndexOutOfBoundsException e) {}
+		
+		Collections.sort(parks, new Comparator<NationalParkLocation>() {
+
+			@Override
+			public int compare(NationalParkLocation npl1,
+					NationalParkLocation npl2) {
+					
+				Double distanceScore1 = distanceScore.get(npl1);
+				Double distanceScore2 = distanceScore.get(npl2);
 				Double ratingScore1 = ratingScore.get(npl1);
 				Double ratingScore2 = ratingScore.get(npl2);
 				
@@ -74,13 +101,9 @@ public class Ranking implements Iterable<NationalParkLocation> {
 				
 				if (score1 > score2){
 					return 1;
-				}
-				
-				else if (score1 == score2){
+				} else if (score1 == score2){
 					return 0;
-				}
-				
-				else{
+				} else{
 					return -1;
 				}
 				
@@ -92,11 +115,12 @@ public class Ranking implements Iterable<NationalParkLocation> {
 	}
 	
 	private double rating(NationalParkLocation npl){
-		GooglePlace pgp = gps.getPlaceDetails(npl.getName());
+		return 0;
+		/*GooglePlace pgp = gps.getPlaceDetails(npl.getName());
 		if (pgp == null){
 			return 0;
 		}
-		return pgp.getRating();
+		return pgp.getRating();*/
 	}
 
 	public String toString(){
