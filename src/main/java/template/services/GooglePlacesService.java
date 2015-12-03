@@ -29,6 +29,8 @@ public class GooglePlacesService {
 		CacheManager cm = CacheManager.create();
 		Cache c = cm.getCache("getPlaceDetails");
 		Element element = c.get(locationName);
+		System.out.println(locationName);
+		System.out.println(element);
 		if (element == null) {
 			GooglePlaces gps = restTemplate.getForObject(URL,
 					  GooglePlaces.class, JONATHAN_KEY, locationName);

@@ -43,10 +43,6 @@ public class Ranking implements Iterable<NationalParkLocation> {
 			distanceScore.put(npl, npl.distance(latitude, longitude));
 		}
 		
-		for(NationalParkLocation npl: parks){
-			ratingScore.put(npl, rating(npl));
-		}
-		
 		// Filter by criteria
 		ArrayList<NationalParkLocation> newParks = new ArrayList<NationalParkLocation>();
 		for (NationalParkLocation npl : parks) {
@@ -93,8 +89,8 @@ public class Ranking implements Iterable<NationalParkLocation> {
 					
 				Double distanceScore1 = distanceScore.get(npl1);
 				Double distanceScore2 = distanceScore.get(npl2);
-				Double ratingScore1 = ratingScore.get(npl1);
-				Double ratingScore2 = ratingScore.get(npl2);
+				Double ratingScore1 = rating(npl1);
+				Double ratingScore2 = rating(npl2);
 				
 				Double score1 = distanceScore1 * DISTANCE_WEIGHT + ratingScore1 * RATING_WEIGHT;
 				Double score2 = distanceScore2 * DISTANCE_WEIGHT + ratingScore2 * RATING_WEIGHT;
@@ -115,12 +111,11 @@ public class Ranking implements Iterable<NationalParkLocation> {
 	}
 	
 	private double rating(NationalParkLocation npl){
-		return 0;
-		/*GooglePlace pgp = gps.getPlaceDetails(npl.getName());
+		GooglePlace pgp = gps.getPlaceDetails(npl.getName());
 		if (pgp == null){
 			return 0;
 		}
-		return pgp.getRating();*/
+		return pgp.getRating();
 	}
 
 	public String toString(){
