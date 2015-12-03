@@ -14,6 +14,7 @@
         http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
         http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
 
+        <context:component-scan base-package="template.algorithm"/>
 		<context:component-scan base-package="template.controllers"/>
 		<context:component-scan base-package="template.main"/>
 		<context:component-scan base-package="template.managed"/>

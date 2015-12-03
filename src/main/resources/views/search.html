@@ -141,6 +141,15 @@ function initMap() {
 		});
 	}	
 	console.log(locations);
+	
+	if (svgLocations.length == 0) {
+		svgLocations.push({
+			name: "No results -  please try again",
+			rank: 1,
+			x: 23,
+			y: 20
+		});
+	}
 
 	var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 4,

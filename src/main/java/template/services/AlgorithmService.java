@@ -7,13 +7,16 @@ import template.algorithm.Ranking;
 
 @Service
 public class AlgorithmService {
+	
+	@Autowired
+	GooglePlacesService gps;
 
 	@Autowired
 	NationalParkLocationService npls;
 	
 	public Ranking getRanking(double latitude, double longitude) {
 		// TODO: Fix this method call
-		return new Ranking(latitude, longitude, npls, null, null, null);
+		return new Ranking(latitude, longitude, npls, gps, null, null, null);
 	}
 
 	public NationalParkLocationService getNpls() {
