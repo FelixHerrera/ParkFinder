@@ -29,26 +29,29 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+
+
+     <div class="navbar header">
+<a class="navbar-brand" href="#" ParkFinder>
+<img alt="logo-svg" src="/images/ArrowheadLogo.png" style= "height: 2em;z-index: 100; position:relative; top:7px">
+<h3 class="logo-text" style= "color: white; display: inline; margin-left: .5em;z-index: 100; position:absolute; top:10px">ParkFinder</h3>
+</a>
+       <nav class="navbar navbar-default navbar-map" role="navigation">
+         <div class="container-fluid">
+           <div class="navbar-header">
+            <b></b>
+             </div>
+             <div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="about">About</a></li>
+    </ul>
+  </div>
+           </div>
+       </nav>
+     </div>
+     
     <div class="promo">
-      <div class="promo-mask">
-
-        <nav class="navbar navbar-default navbar-static-top navbar-home" role="navigation">
-          <div class="container-fluid">
-            <div class="navbar-header">
-
-             <b><a class="navbar-brand" href="/">ParkFinder</a></b>
-              </div>
-              <div>
-			      <ul class="nav navbar-nav">
-			        <li class="active"><a href="/">Home</a></li>
-			        <li><a href="/about">About</a></li>
-			      </ul>
-			    </div>
-
-
-            </div>
-          </div>
-        </nav>
 
         <div class="promo-content">
           <div class="promo-headline">
@@ -56,7 +59,6 @@
           </div>
           <div class="promo-subhead">
 
-          </div>
         </div>
       </div>
     </div>
@@ -71,7 +73,7 @@
             What kind of place are you looking to explore?
           </p>
           <form action="/search">
-            <div class="form-group">
+<div class="form-group">
             <label for="">
               Location
             </label>
@@ -79,15 +81,13 @@
             </div>
             <div class="form-group">
               <label>Maximum Distance From Location</label>
-              <input id="toggleMaxDistance" type="checkbox">
-              <div id="maxDistanceContainer" hidden=true>
-                <input type="number" name="maxDistance" class="form-control" min="0" max="2000" step="5" value="0">
+              <div id="maxDistanceContainer">
+                <input type="number" name="maxDistance" class="form-control" min="0" max="2000" step="5" value="0" placeholder="No preference">
               </div>
             </div>
             <div class="form-group">
               <label>Terrain Type</label>
-              <input id="toggleTerrainType" type="checkbox">
-              <div id="terrainTypeContainer" hidden=true>
+              <div id="terrainTypeContainer">
                 <input type="radio" name="terrainType" value="NoPreference" checked> No Preference
                 <br>
                 <input type="radio" name="terrainType" value="Historic Sites"> Historic Sites
@@ -97,14 +97,14 @@
                 <input type="radio" name="terrainType" value="Outdoors (Mountains, Forests, Trails)"> Outdoors (Mountains, Forests, Trails)
                 <br>
                 <input type="radio" name="terrainType" value="Parkways, Reserves, and Recreation Areas"> Parkways, Reserves, and Recreation Areas
-              </div>
+                <br>
             </div>
+           </div>
             <div class="form-group">
               <label>Size of Park</label>
-              <input id="toggleParkSize" type="checkbox">
-              <div id="parkSizeContainer" hidden=true>
-                <input type="radio" name="parkSize" value="NoPreference" checked> No Preference
-                <br>
+              <div id="parkSizeContainer">
+               <input type="radio" name="parkSize" value="NoPreference" checked> No Preference
+               <br>
                 <input type="radio" name="parkSize" value="Small"> Small
                 <br>
                 <input type="radio" name="parkSize" value="Medium"> Medium
@@ -118,11 +118,7 @@
       </div>
     </div>
 
-    <div class="footer">
-      <div class="container-fluid">
-        Built with love from the Credera team
-      </div>
-    </div>
+
 
     <!-- build:js scripts/main.js -->
     <script src="/js/jquery.js"></script>
@@ -131,3 +127,4 @@
     <!-- endbuild -->
 </body>
 </html>
+

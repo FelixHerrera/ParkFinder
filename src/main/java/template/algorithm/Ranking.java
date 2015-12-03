@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import template.criteria.Criteria;
 import template.googlePlaceConsumer.json.GooglePlace;
 import template.models.NationalParkLocation;
 import template.services.GooglePlacesService;
 import template.services.NationalParkLocationService;
-import template.services.NationalParkLocationServiceImpl;
 
-public class Ranking {
+public class Ranking implements Iterable<NationalParkLocation> {
 	
 	private GooglePlacesService gps;
 	
@@ -104,6 +101,11 @@ public class Ranking {
 
 	public String toString(){
 		return parks.toString();
+	}
+
+	@Override
+	public Iterator<NationalParkLocation> iterator() {
+		return parks.iterator();
 	}
 
 }
