@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import template.algorithm.Ranking;
@@ -56,6 +57,11 @@ public class MainController {
 		logger.debug(parkSize);
 		
 		GooglePlace gp = gps.getPlaceDetails(locationName);
+		if (gp == null){
+			model.addAttribute("gl", null);
+			model.addAttribute("ranking", new ArrayList<NationalParkLocation>());
+			return "search";
+		}
 		GoogleLocation gl = gp.getGoogleGeometry().getGoogleLocation();
 		
 		logger.debug("Given google location: " + gl);

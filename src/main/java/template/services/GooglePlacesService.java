@@ -1,5 +1,7 @@
 package template.services;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,11 @@ public class GooglePlacesService {
 		if (element == null) {
 			GooglePlaces gps = restTemplate.getForObject(URL,
 					  GooglePlaces.class, FELIX_KEY, locationName);
-			GooglePlace gp = gps.getGooglePlaces().get(0);
+			ArrayList<GooglePlace> intermediate = gps.getGooglePlaces();
+			if (intermediate.size() == 0){
+				return null;
+			}
+			GooglePlace gp = intermediate.get(0);
 			c.put(new Element(locationName, gp));
 			c.flush();
 			return gp;
