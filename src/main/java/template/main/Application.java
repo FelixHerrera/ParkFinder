@@ -27,7 +27,7 @@ public class Application {
 				new CacheConfiguration("getPlaceDetails", 1000) // Create a new cache that can contain 1000 objects 
 				    .memoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.LFU) 
 				    .eternal(false)  
-				    .diskExpiryThreadIntervalSeconds(3600)
+				    .diskExpiryThreadIntervalSeconds(2629743)
 				    .diskPersistent(true));
 		cm.addCache(getPlaceDetailsCache);
 		
