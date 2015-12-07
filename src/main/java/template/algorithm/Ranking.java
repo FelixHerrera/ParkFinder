@@ -1,3 +1,7 @@
+/*
+ * Filename:    Ranking.java
+ * Description: This object represents a ranking of National Park Locations.
+ */
 package template.algorithm;
 
 import java.util.ArrayList;
