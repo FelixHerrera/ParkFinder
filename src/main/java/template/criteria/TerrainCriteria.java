@@ -1,3 +1,8 @@
+/*
+ * Filename: TerrainCriteria.java
+ * Description: Implementation for the criteria class for terrain criteria
+ */
+
 package template.criteria;
 
 import java.util.ArrayList;

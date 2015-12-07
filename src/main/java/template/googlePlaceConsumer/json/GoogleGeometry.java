@@ -1,3 +1,7 @@
+/*
+ * Filename:    GoogleGeometry.java
+ * Description: This holds the geometry of a GooglePlace json object
+ */
 package template.googlePlaceConsumer.json;
 
 import java.io.Serializable;

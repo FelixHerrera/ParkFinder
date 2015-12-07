@@ -1,3 +1,8 @@
+/*
+ * Filename: DistanceCriteria.java
+ * Description: Implementation for the criteria class for distance criteria
+ */
+
 package template.criteria;
 
 import template.models.NationalParkLocation;

@@ -1,3 +1,7 @@
+/*
+ * Filename:    GooglePlaces.java
+ * Description: This holds a list of GooglePlace json objects
+ */
 package template.googlePlaceConsumer.json;
 
 import java.util.ArrayList;
