@@ -19,16 +19,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import template.googlePlaceConsumer.json.GooglePlace;
 import template.main.CustomEmbeddedWebApplicationContext;
 import template.models.NationalParkLocation;
-import template.services.AlgorithmService;
 import template.services.GooglePlacesService;
 import template.services.NationalParkLocationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("../../configuration/applicationContext.xml")
 public class RankingTest {
-
-	@Autowired
-	AlgorithmService as;
 	
 	@Autowired
 	GooglePlacesService gps;

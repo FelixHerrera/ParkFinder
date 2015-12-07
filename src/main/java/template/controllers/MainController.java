@@ -25,7 +25,6 @@ import template.managed.resources.AlloyResourceHttpRequestHandler;
 import org.springframework.ui.Model;
 
 import template.models.NationalParkLocation;
-import template.services.AlgorithmService;
 import template.services.GooglePlacesService;
 import template.services.NationalParkLocationService;
 
