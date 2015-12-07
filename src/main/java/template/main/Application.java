@@ -1,3 +1,8 @@
+/*
+ * Filename: Apllication.java
+ * Description: This file contains logic for the application to cache api calls
+ * as well as running the application
+ */
 package template.main;
 
 import org.springframework.core.io.ClassPathResource;
@@ -19,7 +24,6 @@ public class Application {
 	}
 
 	public void run() {
-		// TODO JONATHAN: I have not figured out how to use the spring api with this, so we are creating it manually
 		String path = "src/main/resources/db";
 		CacheManager cm = CacheManager.create(new Configuration().diskStore(new DiskStoreConfiguration().path(path)));
 		

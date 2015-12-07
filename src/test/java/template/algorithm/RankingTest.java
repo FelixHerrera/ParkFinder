@@ -1,3 +1,8 @@
+/*
+ * Filename: RankingTest.java
+ * Description: This file contains the unit tests for testing our distance function
+ * and ranking algorithm
+ */
 package template.algorithm;
 
 import static org.junit.Assert.*;

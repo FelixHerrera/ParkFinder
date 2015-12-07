@@ -1,3 +1,7 @@
+/*
+ * Filename: Main.java
+ * Description: This file contains our main which will run the application
+ */
 package template.main;
 
 public class Main {

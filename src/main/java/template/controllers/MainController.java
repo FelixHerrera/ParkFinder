@@ -1,3 +1,7 @@
+/*
+ * Filename: MainController.java
+ * Description: This file contains all the routes for the webpages in our application.
+ */
 package template.controllers;
 
 
@@ -33,9 +37,6 @@ public class MainController {
 	private GooglePlacesService gps;
 	@Autowired
 	private NationalParkLocationService npls;
-	
-	@Autowired
-	private AlgorithmService as;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -95,22 +96,6 @@ public class MainController {
 		model.addAttribute("ranking", rankedParks);
 		
 		return "search";
-	}
-
-	@RequestMapping("/modeltest")
-	public String modelTest(Model model) {
-		model.addAttribute("hello", "World");
-		return "modelTest";
-	}
-
-	@RequestMapping("/location")
-	public String location(Model model){
-		return "location";
-	}
-	
-	@RequestMapping("/locations")
-	public String locations(Model model){
-		return "locations";
 	}
 	
 	@RequestMapping("/about")
