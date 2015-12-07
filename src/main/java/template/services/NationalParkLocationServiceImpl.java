@@ -1,3 +1,8 @@
+/*
+ * Filename: NationalParkLocationServiceImpl.java
+ * Description: Implementation of NationalParkLocationService class to extract data from
+ * National Park Service JSON files
+ */
 package template.services;
 
 import java.io.FileNotFoundException;

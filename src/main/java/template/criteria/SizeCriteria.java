@@ -1,3 +1,7 @@
+/*
+ * Filename: SizeCriteria.java
+ * Description: Implementation for the criteria class for size criteria
+ */
 package template.criteria;
 
 import java.util.ArrayList;

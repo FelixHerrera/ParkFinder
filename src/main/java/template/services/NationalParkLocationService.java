@@ -1,3 +1,8 @@
+/* 
+ * Filename: NationalParkLocationService.java
+ * Description: Declaration of interface for NationalParkLocationService
+ */
+
 package template.services;
 
 import java.util.List;

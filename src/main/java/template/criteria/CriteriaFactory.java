@@ -1,3 +1,7 @@
+/*
+ * Filename: CriteriaFactory.java
+ * Description: Abstract Factory for Criteria classes
+ */
 package template.criteria;
 
 public class CriteriaFactory {

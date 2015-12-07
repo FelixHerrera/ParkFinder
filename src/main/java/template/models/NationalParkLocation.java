@@ -1,3 +1,9 @@
+/*
+ * Filename: NationalParkLocation.java
+ * Description: Implementation of a class that stores information about a National Park,
+ * including name, latitude, longitude, etc., as well as a method to calculate distance
+ */
+
 package template.models;
 
 import template.services.NationalParkLocationServiceImpl;
