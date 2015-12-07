@@ -1,3 +1,7 @@
+/*
+ * Filename:    GoogleLocation.java
+ * Description: This holds the location of a GooglePlace json object
+ */
 package template.googlePlaceConsumer.json;
 
 import java.io.Serializable;
